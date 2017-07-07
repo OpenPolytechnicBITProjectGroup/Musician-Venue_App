@@ -2,4 +2,5 @@
 
 #ignore these folders
 node_modules
+npm-debug.log
 build
