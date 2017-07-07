@@ -1,0 +1,5 @@
+.git
+
+#ignore these folders
+node_modules
+build
