@@ -1,7 +1,9 @@
 const express = require('express')
 const app = express()
 
-app.get('/', function (req, res) {
+app.use('/', express.static(__dirname + '/public'));
+
+app.get('/working', function (req, res) {
   res.send('<h1>Yay it works!</h1><p>Express.js Example App</p>')
 })
 app.set('port', (process.env.PORT || 5000));
