@@ -2,4 +2,12 @@
 
 #ignore these folders
 node_modules
+npm-debug.log
 build
+
+#ignore these files
+.env
+.dev
+.DS_Store
+
+## Docker files should be passed in case we want to migrate through docker
