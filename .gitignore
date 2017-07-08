@@ -5,6 +5,9 @@ node_modules
 npm-debug.log
 build
 
+# Ignore intellij project folder.
+.idea
+
 #ignore these files
 .env
 .dev
