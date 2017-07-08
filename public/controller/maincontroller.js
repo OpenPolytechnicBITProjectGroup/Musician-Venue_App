@@ -13,13 +13,23 @@ app.factory("Test", function() {
       }
     }
 })
-      
+
+// Returns some test Venue objects. 
+function addTestVenues() {
+	var venues = [];
+	
+	venues.push(new Venue("Crown Hotel", 500, "Auckland", ["Rock", "Blues", "Country"]));
+	venues.push(new Venue("Bar Sinister", 300, "Christchurch", ["Metal", "Rock"]));
+	
+	return venues;
+}
+
 app.controller('MainCtrl', function ($scope, Test) {
   $scope.bands = Test.all();
+	$scope.venues = addTestVenues();
 });
    
 app.controller('WorkingCtrl', function ($scope, Test) {
   $scope.working = Test.working();
 });        
-
-        
+	
