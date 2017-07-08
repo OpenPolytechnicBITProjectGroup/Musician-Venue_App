@@ -1,7 +1,7 @@
 {
   "name": "musician-venue",
   "version": "0.0.1",
-  "description": "Web app for bands and venues to find each other.\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C\u001b[Cto help",
+  "description": "Web app for bands and venues to find each other.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/OpenPolytechnicBITProjectGroup/Musician-Venue_App#readme",
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "express": "^4.15.3"
   }
 }

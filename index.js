@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 
 app.use('/', express.static(__dirname + '/public'));
+app.use('/css/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/css')); // redirect CSS bootstrap
 
 app.get('/working', function (req, res) {
   res.send('<h1>Yay it works!</h1><p>Express.js Example App</p>')
