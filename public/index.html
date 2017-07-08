@@ -14,34 +14,34 @@
 <body ng-app="tester" ng-controller="MainCtrl">
 <div id="graph">
 </div>
-<div role="navigation" class="navbar navbar-default navbar-static-top">
+<nav role="navigation" class="navbar navbar-default navbar-static-top">
     <div class="container">
-        <div class="row">
-            <div class="col-sm-6 col-md-6">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <form role="search" class="navbar-form" id="search">
-                            <div class="form-group">
-                                <input type="text" value="Rock" placeholder="Search for Band Genre" class="form-control" name="search">
-                            </div>
-                            <button class="btn btn-default" type="submit">Search</button>
-                        </form>
-                    </li>
-                </ul>
-            </div>
-            <div class="navbar-header col-sm-6 col-md-6">
-                <div class="logo-well">
-                    <a href="http://neo4j.com/developer-resources">
-                    <img src="https://neo4j-contrib.github.io/developer-resources/language-guides/assets/img/logo-white.svg" alt="Neo4j World's Leading Graph Database" id="logo">
-                    </a>
-                </div>
-                <div class="navbar-brand">
-                    <div class="brand">The Band List</div>
-                </div>
-            </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="http://neo4j.com/developer-resources" style="padding: 0; line-height: 50px">
+                <img height="100%" class="pull-left"
+                     src="https://neo4j-contrib.github.io/developer-resources/language-guides/assets/img/logo-white.svg"
+                     alt="Neo4j World's Leading Graph Database" id="logo">
+                The Band List
+            </a>
+
         </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <form role="search" class="navbar-form" id="search">
+                        <div class="form-group">
+                            <input type="text" value="Rock" placeholder="Search for Band Genre" class="form-control"
+                                   name="search">
+                        </div>
+                        <button class="btn btn-default" type="submit">Search</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+
+
     </div>
-</div>
+</nav>
 
 <div class="row">
     <div class="col-md-5">
@@ -56,10 +56,16 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="band in bands">
-                        <td><pre>{{band}}</pre></td>
-                        <td><pre>{{band.cost | json}}</pre></td>
-                        <td><pre>{{band.rating | json}}</pre></td>
+                <tr ng-repeat="band in bands">
+                    <td>
+                        <pre>{{band}}</pre>
+                    </td>
+                    <td>
+                        <pre>{{band.cost | json}}</pre>
+                    </td>
+                    <td>
+                        <pre>{{band.rating | json}}</pre>
+                    </td>
                 </tbody>
             </table>
         </div>
@@ -75,17 +81,33 @@
                     <h4>Band Details</h4>
                     <ul id="crew">
                     </ul>
-                    <h3 class="working" ng-controller="WorkingCtrl"><pre>{{working}}</pre></h3>
+                    <h3 class="working" ng-controller="WorkingCtrl">
+                        <pre>{{working}}</pre>
+                    </h3>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <style type="text/css">
-    .node { stroke: #222; stroke-width: 1.5px; }
-    .node.actor { fill: #888; }
-    .node.movie { fill: #BBB; }
-    .link { stroke: #999; stroke-opacity: .6; stroke-width: 1px; }
+    .node {
+        stroke: #222;
+        stroke-width: 1.5px;
+    }
+
+    .node.actor {
+        fill: #888;
+    }
+
+    .node.movie {
+        fill: #BBB;
+    }
+
+    .link {
+        stroke: #999;
+        stroke-opacity: .6;
+        stroke-width: 1px;
+    }
 </style>
 
 
