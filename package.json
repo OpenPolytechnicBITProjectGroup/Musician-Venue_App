@@ -18,6 +18,8 @@
   "homepage": "https://github.com/OpenPolytechnicBITProjectGroup/Musician-Venue_App#readme",
   "dependencies": {
     "bootstrap": "^3.3.7",
-    "express": "^4.15.3"
+    "express": "^4.15.3",
+    "lodash": "^4.17.4",
+    "neo4j": "^2.0.0-RC2"
   }
 }
