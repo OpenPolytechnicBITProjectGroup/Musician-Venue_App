@@ -6,9 +6,9 @@ var url = (process.env['NEO4J_URL'] || process.env['GRAPHENEDB_URL'] ||
         'http://neo4j:neo4j2@localhost:7474')
 var bolt_url = (process.env['NEO4J_BOLT_URL'] || process.env['GRAPHENEDB_BOLT_URL'] ||
         'bolt://localhost');
-var bolt_user = (process.env['NEO4J_USER'] || process.env['GRAPHENEDB_USER'] ||
+var bolt_user = (process.env['NEO4J_BOLT_USER'] || process.env['GRAPHENEDB_BOLT_USER'] ||
         'neo4j');
-var bolt_pass = (process.env['NEO4J_PASSWORD'] || process.env['GRAPHENEDB_PASSWORD'] ||
+var bolt_pass = (process.env['NEO4J_BOLT_PASSWORD'] || process.env['GRAPHENEDB_BOLT_PASSWORD'] ||
         'neo4j2');
 
 
