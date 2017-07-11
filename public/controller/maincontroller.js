@@ -1,6 +1,6 @@
 var app = angular.module('tester', []);
 
-app.factory("Test", [('$scope', '$http'), function() {
+app.factory("Test", [ function() {
   var bands = ["Six60", "Shihad", "Exponents"];
   var working = "A description of the band";
 
