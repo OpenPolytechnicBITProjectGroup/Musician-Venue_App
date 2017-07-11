@@ -19,6 +19,9 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "express": "^4.15.3",
+    "gulp": "^3.9.1",
+    "gulp-less": "^3.3.2",
+    "gulp-sourcemaps": "^2.6.0",
     "lodash": "^4.17.4",
     "neo4j-driver": "^1.4.0"
   }
