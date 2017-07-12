@@ -4,8 +4,16 @@ const app = express();
 /*
  * Morgan logs HTTP requests.
  */
-var morgan = require('morgan');
-app.use(morgan("dev"));
+try {
+    var morgan = require('morgan');
+    app.use(morgan("dev"));
+}
+catch (e) {
+    if (e instanceof Error && e.code === "MODULE_NOT_FOUND")
+        console.log("Morgan not found. Continuing without loading.");
+    else
+        throw e;
+}
 
 var routes = require('./app/routes/routes.js');
 
