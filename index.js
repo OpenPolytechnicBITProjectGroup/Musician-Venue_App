@@ -4,12 +4,11 @@ const app = express();
 var Venue = require('./db_api/venue.js');
 var db = require('./db_api/db_api.js');
 
+/*
+ * Make sure this line stays above all other routes as they will override it for their specific URL.
+ * Otherwise, urls that should be routed using express may be trying to find actual files in ./public
+ */
 app.use('/', express.static(__dirname + '/public'));
-
-app.get('/working', function (req, res) {
-    console.log('Working recieved');
-    res.send('<h1>Yay it works!</h1><p>Express.js Example App</p>');
-});
 
 // Gets request from client and activates api call
 app.get('/other_venues', function (req, res) {
