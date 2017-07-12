@@ -6,14 +6,14 @@ Repo for the Musician-Venue WebApp
 * [Neo4j Bolt JavaScript Driver](https://github.com/neo4j/neo4j-javascript-driver)
 * Neo4j
 * Frontend: Angular2, bootstrap, [d3.js](http://d3js.org/)
-* Server: Nodejs, Express
+* Server: Nodejs, Express, uses ES6 language (make sure your IDE supports ES6)
 
 ## Quickstart
 
 ### Setup
 
 ```bash
-$ npm install
+$ npm install -i
 ```
 
 ### Run locally
@@ -32,13 +32,17 @@ or
 # also runs in development mode
 $ node index.js
 ```
-
+or if you have the heroku cli installed
+```bash
+$ heroku local web
+```
+ ### Important for running the node server
 When running in "dev" mode navigate to [http://localhost:5000](http://localhost:5000) to see the application.
 
 
 ## Development protocol notes
 
-The branch \<dev\> is the current mainline for development, pull from this branch `git fetch` to get the lasest code base, create your branch `git checkout -b <your-branch>` and make your changes.
+The branch \<dev\> is the current mainline for development, pull from this branch `git fetch` to get the lasest code base, run `npm install -i`, create your branch `git checkout -b <your-branch>` and make your changes.
 
 On completion of your code changes push your branch to the repository, `git push origin <your-branch>` and create pull request for merging.
 
