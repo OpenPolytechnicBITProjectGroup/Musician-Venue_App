@@ -25,5 +25,8 @@
     "gulp-sourcemaps": "^2.6.0",
     "lodash": "^4.17.4",
     "neo4j-driver": "^1.4.0"
+  },
+  "devDependencies": {
+    "morgan": "^1.8.2"
   }
 }
