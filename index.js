@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const routes = require('./app/routes/routes.js');
 
 
 /*
@@ -16,12 +15,18 @@ catch (e) {
     else
         throw e;
 }
+// Use this global var to avoid long relative paths :)
+global.__baseDir = __dirname;
 
+const routes = require('./app/routes/routes.js');
 
+// Set the express server to whatever is in .evn or default back to 5000.
 app.set('port', (process.env.PORT || 5000));
 
+// Tell express to use the router middleware.
 app.use(routes);
 
+// Start HTTP server at specified port.
 app.listen(app.get('port'), function () {
     var db = require('./app/db_api/db_api.js');
     // these tests will only work if neo4j is running (locally or on heroku)
