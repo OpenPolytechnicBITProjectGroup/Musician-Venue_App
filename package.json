@@ -4,7 +4,8 @@
   "description": "Web app for bands and venues to find each other.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --timeout 10000",
+    "dev": "SET NODE_ENV=dev && node index.js",
     "start": "node index.js"
   },
   "repository": {
@@ -27,6 +28,9 @@
     "neo4j-driver": "^1.4.0"
   },
   "devDependencies": {
+    "chai": "^4.1.0",
+    "chai-http": "^3.0.0",
+    "mocha": "^3.4.2",
     "morgan": "^1.8.2"
   }
 }
