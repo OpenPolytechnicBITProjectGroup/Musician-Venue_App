@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+const routes = require('./app/routes/routes.js');
+
 
 /*
  * Morgan logs HTTP requests.
@@ -15,15 +17,8 @@ catch (e) {
         throw e;
 }
 
-var routes = require('./app/routes/routes.js');
 
 app.set('port', (process.env.PORT || 5000));
-
-/*
- * Make sure this line stays above all other routes as they will override it for their specific URL.
- * Otherwise, urls that should be routed using express may be trying to find actual files in ./public
- */
-app.use('/', express.static(__dirname + '/public'));
 
 app.use(routes);
 

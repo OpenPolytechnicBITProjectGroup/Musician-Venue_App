@@ -38,7 +38,7 @@ app.controller('WorkingCtrl', function ($scope, Test) {
   $scope.working = Test.working();
 });        
 
-// this controller is hooked to second table $scope.other_venues	
+// this controllers is hooked to second table $scope.other_venues
 app.controller('VenueCtrl', function ($scope, $http) {
   
      // Send request to server
