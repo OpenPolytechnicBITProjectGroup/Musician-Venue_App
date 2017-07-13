@@ -4,21 +4,26 @@ const app = express();
 /*
  * Morgan logs HTTP requests.
  */
-var morgan = require('morgan');
-app.use(morgan("dev"));
+try {
+    var morgan = require('morgan');
+    app.use(morgan("dev"));
+}
+catch (e) {
+    if (e instanceof Error && e.code === "MODULE_NOT_FOUND")
+        console.log("Morgan not found. Continuing without loading.");
+    else
+        throw e;
+}
+// Use this global var to avoid long relative paths :)
+global.__baseDir = __dirname;
 
-var routes = require('./app/routes/routes.js');
-
-app.set('port', (process.env.PORT || 5000));
-
-/*
- * Make sure this line stays above all other routes as they will override it for their specific URL.
- * Otherwise, urls that should be routed using express may be trying to find actual files in ./public
- */
-app.use('/', express.static(__dirname + '/public'));
-
+const routes = require('./app/routes/routes.js');
 app.use(routes);
 
+// Set the express server to whatever is in .evn or default back to 5000.
+app.set('port', (process.env.PORT || 5000));
+
+// Start HTTP server at specified port.
 app.listen(app.get('port'), function () {
     var db = require('./app/db_api/db_api.js');
     // these tests will only work if neo4j is running (locally or on heroku)

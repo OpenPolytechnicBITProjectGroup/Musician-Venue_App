@@ -3,9 +3,21 @@
  * It may eventually be split up into modules.
  * @type {router}
  */
-const router = require('express').Router();
-var db = require('../db_api/db_api.js');
-var Venue = require('../db_api/venue.js');
+const express = require('express');
+const router = express.Router();
+const path = require('path');
+
+var db = require(__baseDir + '/app/db_api/db_api.js');
+var Venue = require(__baseDir + '/app/db_api/venue.js');
+
+// Static paths for css and js
+router.use('/css', express.static(__baseDir + '/public/css'));
+
+router.use('/js', express.static(__baseDir + '/public/js'));
+
+router.get('/', function(req, res){
+    res.sendFile(__baseDir + '/public/views/index.html');
+});
 
 // Gets request from client and activates api call
 router.get('/other_venues', function (req, res) {
