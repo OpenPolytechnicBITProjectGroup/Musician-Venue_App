@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 
-
 /*
  * Morgan logs HTTP requests.
  */
@@ -19,12 +18,10 @@ catch (e) {
 global.__baseDir = __dirname;
 
 const routes = require('./app/routes/routes.js');
+app.use(routes);
 
 // Set the express server to whatever is in .evn or default back to 5000.
 app.set('port', (process.env.PORT || 5000));
-
-// Tell express to use the router middleware.
-app.use(routes);
 
 // Start HTTP server at specified port.
 app.listen(app.get('port'), function () {
