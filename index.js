@@ -25,10 +25,15 @@ app.set('port', (process.env.PORT || 5000));
 
 // Start HTTP server at specified port.
 app.listen(app.get('port'), function () {
-    var db = require('./app/db_api/db_api.js');
+    /*
+    // db.test() not required now as running mocha-chai tests
     // these tests will only work if neo4j is running (locally or on heroku)
     // otherwise remove before running
+    
+    var db = require('./app/db_api/db_api.js');
     db.test();
-
+    */
     console.log('Started Server. Listening on ' + app.get('port'));
 });
+
+module.exports = {app, routes};
