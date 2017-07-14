@@ -15,11 +15,6 @@ app.factory("Test", [ function() {
     }
 }]);
 
-function postVenues($scope, venues) {
-  console.log("postingVenues:", venues);
-  $scope.other_venues = venues;
-}
-
 // Returns some test Venue objects. 
 function addTestVenues() {
 	var venues = [];
