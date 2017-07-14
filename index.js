@@ -1,5 +1,5 @@
 const express = require('express');
-const app = express();
+const app = module.exports = express();
 
 /*
  * Morgan logs HTTP requests.
@@ -24,7 +24,8 @@ app.use(routes);
 app.set('port', (process.env.PORT || 5000));
 
 // Start HTTP server at specified port.
-app.listen(app.get('port'), function () {
+if(!module.parent) { // conditional to make sure tests are not trying to call listen twice
+    app.listen(app.get('port'), function () {
     /*
     // db.test() not required now as running mocha-chai tests
     // these tests will only work if neo4j is running (locally or on heroku)
@@ -34,6 +35,6 @@ app.listen(app.get('port'), function () {
     db.test();
     */
     console.log('Started Server. Listening on ' + app.get('port'));
-});
-
+    });
+}
 module.exports = {app, routes};

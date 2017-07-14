@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --timeout 10000",
+    "test:watch": "npm test -- --watch -R min",
     "dev": "SET NODE_ENV=dev && node index.js",
     "start": "node index.js"
   },
