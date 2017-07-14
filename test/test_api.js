@@ -25,9 +25,23 @@ describe('Venues', () => {
 });
 
 /*
+    * Test the /GET route
+    */
+    describe('GET /', () => {
+        it('Should respond with a status 200', (done => {
+            chai.request(app.app)
+            .get('/')
+            .end((err, res) => {
+                res.should.have.status(200);
+                done();
+            });
+        }));
+    });
+
+/*
     * Test the GET /other_venues route
     */
-    describe('/GET other_venues', () => {
+    describe('GET /other_venues', () => {
         it('Should GET all the venues', (done => {
             chai.request(app.app)
             .get('/other_venues')
