@@ -7,16 +7,16 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 
-var db = require(__baseDir + '/app/db_api/db_api.js');
-var Venue = require(__baseDir + '/app/db_api/venue.js');
+var db = require(__baseDir + '/server/db_api/db_api.js');
+var Venue = require(__baseDir + '/server/db_api/venue.js');
 
 // Static paths for css and js
-router.use('/css', express.static(__baseDir + '/public/css'));
+router.use('/css', express.static(__baseDir + '/client/css'));
 
-router.use('/js', express.static(__baseDir + '/public/js'));
+router.use('/js', express.static(__baseDir + '/client/js'));
 
 router.get('/', function(req, res){
-    res.sendFile(__baseDir + '/public/views/index.html');
+    res.sendFile(__baseDir + '/client/views/index.html');
 });
 
 // Gets request from client and activates api call

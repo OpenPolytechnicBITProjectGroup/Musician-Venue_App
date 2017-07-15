@@ -8,7 +8,7 @@ gulp.task('less', function () {
         .pipe(sourcemaps.init())
         .pipe(less())
         .pipe(sourcemaps.write(""))
-        .pipe(gulp.dest('public/css'));
+        .pipe(gulp.dest('client/css'));
 });
 
 // Watch scss folder for changes
