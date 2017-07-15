@@ -8,12 +8,13 @@ var app = require('../index.js');
 var _ = require('lodash');
 
 // get whats needed from api
-var db = require('../app/db_api/db_api.js');
-var Venue = require('../app/db_api/venue.js');
+var db = require('../server/db_api/db_api.js');
+var Venue = require('../server/db_api/venue.js');
+
 
 // Add the chai assertions
-let should = chai.Should();
-let expect = chai.expect;
+var should = chai.Should();
+var expect = chai.expect;
 
 chai.use(chaiHttp);
 // our parent block
