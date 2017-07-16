@@ -12,8 +12,8 @@ function Venue(name, capacity, location, genres) {
 function NodeVenue(_node) {
 	_.extend(this, _node.properties)
 		
-		if (this.capacity)
-		this.capacity = this.capacity.toNumber();
+		//if (this.capacity)
+		//this.capacity = this.capacity.toNumber();
 }
 
 exports.Venue = Venue;

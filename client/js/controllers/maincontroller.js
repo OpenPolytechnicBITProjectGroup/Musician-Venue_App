@@ -16,27 +16,49 @@ app.factory("Test", [ function() {
 }]);
 
 // Returns some test Venue objects. 
-function addTestVenues() {
+function addTestVenues($scope, $http) {
 	var venues = [];
-  
-	venues.push(new Venue("Crown Hotel", 500, "Auckland", ["Rock", "Blues", "Country"]));
-	venues.push(new Venue("Bar Sinister", 300, "Christchurch", ["Metal", "Rock"]));
+  // Input new data here (i.e the submission form)
+	venues.push(new Venue("The Velvet", 50, "Auckland", ["Rock", "Blues", "Country"]));
+	
+  // Wait for click then send venue data (submit button)
+  $scope.sendVenue = function() {
+    // params reaches the server as query
+    $http.get('/send_venue', {params: venues}).then(function(res) {
+
+      console.log("response returned:", res);
+      if (res.data === 'OK'){
+        // response is OK so update the venue List
+        $http.get('/other_venues').then(function (resp) {
+          console.log("updating other_venues with:", resp.data);
+          $scope.other_venues = resp.data;
+        });
+      }
+    });
+  }
+
 	return venues;
 }
 
 app.controller('MainCtrl', function ($scope, Test) {
   $scope.bands = Test.all();
-	$scope.venues = addTestVenues();
+	
 });
    
 app.controller('WorkingCtrl', function ($scope, Test) {
   $scope.working = Test.working();
 });        
 
-// this controllers is hooked to second table $scope.other_venues
+/* this controller is hooked to the entire venue section
+  * it controls both venue tables, the top being send data
+  * the bottom table is recieved from database
+  */
 app.controller('VenueCtrl', function ($scope, $http) {
-  
-     // Send request to server
+
+      // This acts like a submission form..
+      $scope.venues = addTestVenues($scope, $http);
+
+     // Send request to server on first load of page and return
         console.log("sending request to server");
         $http.get('/other_venues')
           .then(function (resp) {
