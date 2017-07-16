@@ -60,12 +60,12 @@ function createVenue(venue) {
 
     resultPromise.then(result => {
     session.close();
-
+    /*
     const singleRecord = result.records[0];
     const oneVenue = singleRecord.get(0);
 
     console.log(oneVenue);
-
+    */
     }).catch(error => {
         console.log(error);
     });
@@ -100,6 +100,51 @@ function getAllBands() {
 
 }
 
+function getAllGenres() {
+    var session = db.session();
+    
+    const resultPromise = session.readTransaction(tx => tx.run(
+        'MATCH (g:Genre) RETURN g.name AS name'
+        ));
+
+    return resultPromise.then(result => {
+    session.close();
+
+    return result.records.map(record => {
+        return record.get(['name']);
+        });
+    }).catch(error => {
+        console.log(error);
+    });
+}
+
+/*
+ * Loads CSV files of essential data if not already in existance
+ * within the database
+ */
+function initialise() {
+    // call the genre.csv file and install Genre nodes
+    var session = db.session();
+    
+    const resultPromise = session.writeTransaction(tx => tx.run(
+        'LOAD CSV FROM "https://raw.githubusercontent.com/OpenPolytechnicBITProjectGroup/Resources/master/Database_files/genres.csv" \
+        as csvLine \
+        MERGE (g:Genre {name: csvLine}) RETURN g')); // if the genre exists it wont be added
+
+    resultPromise.then(result => {
+    session.close();
+
+    const singleRecord = result.records[0];
+    const oneGenre = singleRecord.get(0);
+
+    console.log(oneGenre);
+
+    }).catch(error => {
+        console.log(error);
+    });
+    
+}
+
 exports.test = test;
 exports.db = db;
 exports.neo4j = neo4j;
@@ -107,6 +152,8 @@ exports.createBand = createBand;
 exports.createVenue = createVenue;
 exports.getAllBands = getAllBands;
 exports.getAllVenues = getAllVenues;
+exports.getAllGenres = getAllGenres;
+exports.initialise = initialise;
 
 module.exports = {test, db, neo4j, createBand,
-     createVenue, getAllBands,getAllVenues};
+     createVenue, getAllBands,getAllVenues,getAllGenres, initialise};

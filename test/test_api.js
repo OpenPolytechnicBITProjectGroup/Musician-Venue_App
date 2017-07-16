@@ -71,3 +71,20 @@ describe('Venues', () => {
                 }); 
         }));
     });    
+
+/*
+ * Test GET /genres
+ */
+    describe('GET /genre', () => {
+        it('Should return an array of genres', (done => {
+            chai.request(app.app)
+                .get('/genres')
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('array');
+                    expect(res.body[0][0]).to.be.a('string');
+                    expect(res.body[0][0]).to.equal('Alternative');
+                    done();
+                });
+        }));
+    });

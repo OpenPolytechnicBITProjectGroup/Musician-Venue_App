@@ -36,6 +36,7 @@ router.get('/other_venues', function (req, res) {
     });
 });
 
+// Recieves a venue as an object and sends to database
 router.get('/send_venue', function (req, res) {
     // the params sent by client retrieved by req.query[0]
     //console.log("Got a request:", (req.query[0]|| req.query['venue']));
@@ -46,6 +47,20 @@ router.get('/send_venue', function (req, res) {
                                     jvenue.location, jvenue.genres));
     // send a response to tell client to update the view
     res.send('OK');
+});
+
+// Gets the list of genres from the database
+// This list will be installed on server start up if not already done
+router.get('/genres', function (req, res) {
+    var send = [];
+    db.getAllGenres().then(genres => {
+        if (genres) {
+            genres.forEach(genre => {
+                send.push(genre);
+            });
+        }
+        res.send(send);
+    });
 })
 
 module.exports = router;
