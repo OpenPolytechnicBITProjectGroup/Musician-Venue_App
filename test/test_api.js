@@ -82,8 +82,8 @@ describe('Venues', () => {
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('array');
-                    expect(res.body[0][0]).to.be.a('string');
-                    expect(res.body[0][0]).to.equal('Alternative');
+                    expect(res.body[0]).to.be.a('string');
+                    expect(res.body[0]).to.equal('Alternative');
                     done();
                 });
         }));

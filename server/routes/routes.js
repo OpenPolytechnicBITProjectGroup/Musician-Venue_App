@@ -43,10 +43,17 @@ router.get('/send_venue', function (req, res) {
     // parse the JSON then create object
     var jvenue = JSON.parse((req.query[0]|| JSON.stringify(req.query['venue'])));
     //console.log("this is the jvenue:", jvenue);
-    db.createVenue(new Venue.Venue(jvenue.name, jvenue.capacity,
+    var resp = function() {
+        db.createVenue(new Venue.Venue(jvenue.name, jvenue.capacity,
                                     jvenue.location, jvenue.genres));
+        res.send('OK');
+    }
+    
     // send a response to tell client to update the view
-    res.send('OK');
+    resp();
+        
+    
+        
 });
 
 // Gets the list of genres from the database
@@ -56,7 +63,7 @@ router.get('/genres', function (req, res) {
     db.getAllGenres().then(genres => {
         if (genres) {
             genres.forEach(genre => {
-                send.push(genre);
+                send.push(genre[0]);
             });
         }
         res.send(send);

@@ -60,12 +60,12 @@ function createVenue(venue) {
 
     resultPromise.then(result => {
     session.close();
-    /*
+    
     const singleRecord = result.records[0];
     const oneVenue = singleRecord.get(0);
 
     console.log(oneVenue);
-    */
+    
     }).catch(error => {
         console.log(error);
     });
@@ -109,7 +109,7 @@ function getAllGenres() {
 
     return resultPromise.then(result => {
     session.close();
-
+    
     return result.records.map(record => {
         return record.get(['name']);
         });

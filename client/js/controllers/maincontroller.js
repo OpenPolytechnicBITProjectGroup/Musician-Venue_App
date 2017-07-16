@@ -17,13 +17,15 @@ app.factory("Test", [ function() {
 
 // Returns some test Venue objects. 
 function addTestVenues($scope, $http) {
-	var venues = [];
+	 var venues = [];
   // Input new data here (i.e the submission form)
-	venues.push(new Venue("The Velvet", 50, "Auckland", ["Rock", "Blues", "Country"]));
+	//venues.push(new Venue("The Velvet", 50, "Auckland", ["Rock", "Blues", "Country"]));
 	
   // Wait for click then send venue data (submit button)
-  $scope.sendVenue = function() {
+  $scope.sendVenue = function(venue) {
+   
     // params reaches the server as query
+    venues.push(new Venue(venue.name, venue.capacity, venue.location, venue.genres));
     $http.get('/send_venue', {params: venues}).then(function(res) {
 
       console.log("response returned:", res);
@@ -32,9 +34,11 @@ function addTestVenues($scope, $http) {
         $http.get('/other_venues').then(function (resp) {
           console.log("updating other_venues with:", resp.data);
           $scope.other_venues = resp.data;
+          
         });
       }
     });
+    venues = [];
   }
 
 	return venues;
@@ -65,6 +69,11 @@ app.controller('VenueCtrl', function ($scope, $http) {
             // sends the returned data to the $scope item
             $scope.other_venues = resp.data;
             console.log("request back:", resp.data);         
-          });      
+          });
+
+      // Get the list of genres
+      $http.get('/genres').then(function (resp) {
+        $scope.db_genres = resp.data;
+      });     
 });
 
