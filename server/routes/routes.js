@@ -16,7 +16,15 @@ router.use('/css', express.static(__baseDir + '/client/css'));
 router.use('/js', express.static(__baseDir + '/client/js'));
 
 router.get('/', function(req, res){
-    res.sendFile(__baseDir + '/client/views/test.html');
+    res.sendFile(__baseDir + '/client/views/index.html');
+});
+
+router.get('/index.html', function(req, res){
+    res.sendFile(__baseDir + '/client/views/index.html');
+});
+
+router.get('/blog.html', function(req, res){
+    res.sendFile(__baseDir + '/client/views/blog.html');
 });
 
 // Gets request from client and activates api call
