@@ -1,0 +1,35 @@
+.brand {
+  display: none;
+}
+.navbar-brand {
+  display: inherit;
+}
+@media (min-width: @screen-md-min) {
+  .brand {
+    display: inherit;
+    margin: 0;
+    padding: 20px 0 10px;
+    text-align: center;
+    font-size: 4em;
+    //font-weight: 700;
+    line-height: normal;
+    color: @orange-accent;
+  }
+
+  .navbar-brand {
+    display: none;
+  }
+  .navbar .navbar-nav {
+    display: inline-block;
+    float: none;
+    line-height: 100%;
+    //vertical-align: top;
+  }
+
+  .navbar .navbar-collapse {
+    text-align: center;
+  }
+  nav {
+    margin-top: 20px;
+  }
+}
