@@ -1,5 +1,6 @@
 const express = require('express');
 const app = module.exports = express();
+require('dotenv').config();
 const db = require('./server/db_api/db_api.js');
 
 /*
