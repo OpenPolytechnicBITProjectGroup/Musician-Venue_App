@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto|Source+Sans+Pro');
 /**
 Customised version of bootstrap.less with only the modules we need.
 Just uncomment and recompile to use any that aren't included.
@@ -267,11 +268,11 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
   color: #333333;
-  background-color: #fff;
+  background-color: #F5F0F6;
 }
 input,
 button,
@@ -282,12 +283,12 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #337ab7;
+  color: #1B6394;
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #23527c;
+  color: #0f3853;
   text-decoration: underline;
 }
 a:focus {
@@ -311,7 +312,7 @@ img {
 .img-thumbnail {
   padding: 4px;
   line-height: 1.42857143;
-  background-color: #fff;
+  background-color: #F5F0F6;
   border: 1px solid #ddd;
   border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;
@@ -518,11 +519,11 @@ mark,
   color: #777777;
 }
 .text-primary {
-  color: #337ab7;
+  color: #1B6394;
 }
 a.text-primary:hover,
 a.text-primary:focus {
-  color: #286090;
+  color: #134669;
 }
 .text-success {
   color: #3c763d;
@@ -554,11 +555,11 @@ a.text-danger:focus {
 }
 .bg-primary {
   color: #fff;
-  background-color: #337ab7;
+  background-color: #1B6394;
 }
 a.bg-primary:hover,
 a.bg-primary:focus {
-  background-color: #286090;
+  background-color: #134669;
 }
 .bg-success {
   background-color: #dff0d8;
@@ -1471,7 +1472,7 @@ th {
   border-top: 2px solid #ddd;
 }
 .table .table {
-  background-color: #fff;
+  background-color: #F5F0F6;
 }
 .table-condensed > thead > tr > th,
 .table-condensed > tbody > tr > th,
@@ -2293,26 +2294,26 @@ fieldset[disabled] .btn-default.focus {
 }
 .btn-primary {
   color: #fff;
-  background-color: #337ab7;
-  border-color: #2e6da4;
+  background-color: #1B6394;
+  border-color: #17557e;
 }
 .btn-primary:focus,
 .btn-primary.focus {
   color: #fff;
-  background-color: #286090;
-  border-color: #122b40;
+  background-color: #134669;
+  border-color: #030c13;
 }
 .btn-primary:hover {
   color: #fff;
-  background-color: #286090;
-  border-color: #204d74;
+  background-color: #134669;
+  border-color: #0e324b;
 }
 .btn-primary:active,
 .btn-primary.active,
 .open > .dropdown-toggle.btn-primary {
   color: #fff;
-  background-color: #286090;
-  border-color: #204d74;
+  background-color: #134669;
+  border-color: #0e324b;
 }
 .btn-primary:active:hover,
 .btn-primary.active:hover,
@@ -2324,8 +2325,8 @@ fieldset[disabled] .btn-default.focus {
 .btn-primary.active.focus,
 .open > .dropdown-toggle.btn-primary.focus {
   color: #fff;
-  background-color: #204d74;
-  border-color: #122b40;
+  background-color: #0e324b;
+  border-color: #030c13;
 }
 .btn-primary:active,
 .btn-primary.active,
@@ -2341,11 +2342,11 @@ fieldset[disabled] .btn-primary:focus,
 .btn-primary.disabled.focus,
 .btn-primary[disabled].focus,
 fieldset[disabled] .btn-primary.focus {
-  background-color: #337ab7;
-  border-color: #2e6da4;
+  background-color: #1B6394;
+  border-color: #17557e;
 }
 .btn-primary .badge {
-  color: #337ab7;
+  color: #1B6394;
   background-color: #fff;
 }
 .btn-success {
@@ -2577,7 +2578,7 @@ fieldset[disabled] .btn-danger.focus {
   background-color: #fff;
 }
 .btn-link {
-  color: #337ab7;
+  color: #1B6394;
   font-weight: normal;
   border-radius: 0;
 }
@@ -2598,7 +2599,7 @@ fieldset[disabled] .btn-link {
 }
 .btn-link:hover,
 .btn-link:focus {
-  color: #23527c;
+  color: #0f3853;
   text-decoration: underline;
   background-color: transparent;
 }
@@ -2672,7 +2673,7 @@ input[type="button"].btn-block {
 .nav .open > a:hover,
 .nav .open > a:focus {
   background-color: #eeeeee;
-  border-color: #337ab7;
+  border-color: #1B6394;
 }
 .nav .nav-divider {
   height: 1px;
@@ -2703,7 +2704,7 @@ input[type="button"].btn-block {
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li.active > a:focus {
   color: #555555;
-  background-color: #fff;
+  background-color: #F5F0F6;
   border: 1px solid #ddd;
   border-bottom-color: transparent;
   cursor: default;
@@ -2749,7 +2750,7 @@ input[type="button"].btn-block {
   .nav-tabs.nav-justified > .active > a,
   .nav-tabs.nav-justified > .active > a:hover,
   .nav-tabs.nav-justified > .active > a:focus {
-    border-bottom-color: #fff;
+    border-bottom-color: #F5F0F6;
   }
 }
 .nav-pills > li {
@@ -2765,7 +2766,7 @@ input[type="button"].btn-block {
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
   color: #fff;
-  background-color: #337ab7;
+  background-color: #1B6394;
 }
 .nav-stacked > li {
   float: none;
@@ -2817,7 +2818,7 @@ input[type="button"].btn-block {
   .nav-tabs-justified > .active > a,
   .nav-tabs-justified > .active > a:hover,
   .nav-tabs-justified > .active > a:focus {
-    border-bottom-color: #fff;
+    border-bottom-color: #F5F0F6;
   }
 }
 .tab-content > .tab-pane {
@@ -2833,7 +2834,7 @@ input[type="button"].btn-block {
 }
 .navbar {
   position: relative;
-  min-height: 50px;
+  min-height: 30px;
   margin-bottom: 20px;
   border: 1px solid transparent;
 }
@@ -2939,10 +2940,10 @@ input[type="button"].btn-block {
 }
 .navbar-brand {
   float: left;
-  padding: 15px 15px;
+  padding: 5px 15px;
   font-size: 18px;
   line-height: 20px;
-  height: 50px;
+  height: 30px;
 }
 .navbar-brand:hover,
 .navbar-brand:focus {
@@ -2962,8 +2963,8 @@ input[type="button"].btn-block {
   float: right;
   margin-right: 15px;
   padding: 9px 10px;
-  margin-top: 8px;
-  margin-bottom: 8px;
+  margin-top: -2px;
+  margin-bottom: -2px;
   background-color: transparent;
   background-image: none;
   border: 1px solid transparent;
@@ -2987,7 +2988,7 @@ input[type="button"].btn-block {
   }
 }
 .navbar-nav {
-  margin: 7.5px -15px;
+  margin: 2.5px -15px;
 }
 .navbar-nav > li > a {
   padding-top: 10px;
@@ -3025,8 +3026,8 @@ input[type="button"].btn-block {
     float: left;
   }
   .navbar-nav > li > a {
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
 }
 .navbar-form {
@@ -3037,8 +3038,8 @@ input[type="button"].btn-block {
   border-bottom: 1px solid transparent;
   -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
-  margin-top: 8px;
-  margin-bottom: 8px;
+  margin-top: -2px;
+  margin-bottom: -2px;
 }
 @media (min-width: 768px) {
   .navbar-form .form-group {
@@ -3123,20 +3124,20 @@ input[type="button"].btn-block {
   border-bottom-left-radius: 0;
 }
 .navbar-btn {
-  margin-top: 8px;
-  margin-bottom: 8px;
+  margin-top: -2px;
+  margin-bottom: -2px;
 }
 .navbar-btn.btn-sm {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 .navbar-btn.btn-xs {
-  margin-top: 14px;
-  margin-bottom: 14px;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 .navbar-text {
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 @media (min-width: 768px) {
   .navbar-text {
@@ -3609,22 +3610,22 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   border-bottom-color: #ddd;
 }
 .panel-primary {
-  border-color: #337ab7;
+  border-color: #1B6394;
 }
 .panel-primary > .panel-heading {
   color: #fff;
-  background-color: #337ab7;
-  border-color: #337ab7;
+  background-color: #1B6394;
+  border-color: #1B6394;
 }
 .panel-primary > .panel-heading + .panel-collapse > .panel-body {
-  border-top-color: #337ab7;
+  border-top-color: #1B6394;
 }
 .panel-primary > .panel-heading .badge {
-  color: #337ab7;
+  color: #1B6394;
   background-color: #fff;
 }
 .panel-primary > .panel-footer + .panel-collapse > .panel-body {
-  border-bottom-color: #337ab7;
+  border-bottom-color: #1B6394;
 }
 .panel-success {
   border-color: #d6e9c6;
@@ -3977,6 +3978,37 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 @media print {
   .hidden-print {
     display: none !important;
+  }
+}
+.brand {
+  display: none;
+}
+.navbar-brand {
+  display: inherit;
+}
+@media (min-width: 992px) {
+  .brand {
+    display: inherit;
+    margin: 0;
+    padding: 20px 0 10px;
+    text-align: center;
+    font-size: 4em;
+    line-height: normal;
+    color: #C1853F;
+  }
+  .navbar-brand {
+    display: none;
+  }
+  .navbar .navbar-nav {
+    display: inline-block;
+    float: none;
+    line-height: 100%;
+  }
+  .navbar .navbar-collapse {
+    text-align: center;
+  }
+  nav {
+    margin-top: 20px;
   }
 }
 
