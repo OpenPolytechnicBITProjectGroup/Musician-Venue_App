@@ -16,7 +16,7 @@ app.factory("Test", [ function() {
 }]);
 
 // Returns some test Venue objects. 
-function addTestVenues($scope, $http) {
+function addTestVenues($scope, $http, VenueSvc) {
 	 var venues = [];
   // Input new data here (i.e the submission form)
 	//venues.push(new Venue("The Velvet", 50, "Auckland", ["Rock", "Blues", "Country"]));
@@ -31,10 +31,9 @@ function addTestVenues($scope, $http) {
       console.log("response returned:", res);
       if (res.data === 'OK'){
         // response is OK so update the venue List
-        $http.get('/other_venues').then(function (resp) {
-          console.log("updating other_venues with:", resp.data);
+        VenueSvc.getVenues().then(function (resp) {
+          console.log('Updating venues with:', resp.data);
           $scope.other_venues = resp.data;
-          
         });
       }
     });
@@ -57,12 +56,12 @@ app.controller('WorkingCtrl', function ($scope, Test) {
   * it controls both venue tables, the top being send data
   * the bottom table is recieved from database
   */
-app.controller('VenueCtrl', function ($scope, $http) {
+app.controller('VenueCtrl', ['$scope', '$http', 'VenueSvc', function ($scope, $http, VenueSvc) {
 
       // This acts like a submission form..
-      $scope.venues = addTestVenues($scope, $http);
+      $scope.venues = addTestVenues($scope, $http, VenueSvc);
 
-     // Send request to server on first load of page and return
+     /* Send request to server on first load of page and return
         console.log("sending request to server");
         $http.get('/other_venues')
           .then(function (resp) {
@@ -70,10 +69,21 @@ app.controller('VenueCtrl', function ($scope, $http) {
             $scope.other_venues = resp.data;
             console.log("request back:", resp.data);         
           });
+      */
+       VenueSvc.getVenues().then(function (resp) {
+         $scope.other_venues = resp.data;
+       });
 
       // Get the list of genres
       $http.get('/genres').then(function (resp) {
         $scope.db_genres = resp.data;
       });     
-});
+}]);
 
+app.service('VenueSvc', function ($http) {
+ this.getVenues = function () {
+    return $http.get('/other_venues').then(function (resp){
+      return resp;
+  });
+ } 
+});
