@@ -44,7 +44,7 @@ router.get('/other_venues', function (req, res) {
     });
 });
 
-// Recieves a venue as an object and sends to database
+// Receives a venue as an object and sends to database
 router.get('/send_venue', function (req, res) {
     // the params sent by client retrieved by req.query[0]
     //console.log("Got a request:", (req.query[0]|| req.query['venue']));
