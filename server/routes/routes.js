@@ -15,16 +15,22 @@ router.use('/css', express.static(__baseDir + '/client/css'));
 
 router.use('/js', express.static(__baseDir + '/client/js'));
 
-router.get('/', function(req, res){
+router.get('/', function (req, res) {
     res.sendFile(__baseDir + '/client/views/index.html');
 });
 
-router.get('/index.html', function(req, res){
+router.get('/index.html', function (req, res) {
     res.sendFile(__baseDir + '/client/views/index.html');
 });
 
-router.get('/blog.html', function(req, res){
-    res.sendFile(__baseDir + '/client/views/blog.html');
+router.get('/venues', function (req, res) {
+    res.sendFile(__baseDir + '/client/views/venues.html');
+});
+router.get('/artists', function (req, res) {
+    res.sendFile(__baseDir + '/client/views/artists.html');
+});
+router.get('/members', function (req, res) {
+    res.sendFile(__baseDir + '/client/views/members.html');
 });
 
 // Gets request from client and activates api call
@@ -49,19 +55,18 @@ router.get('/send_venue', function (req, res) {
     // the params sent by client retrieved by req.query[0]
     //console.log("Got a request:", (req.query[0]|| req.query['venue']));
     // parse the JSON then create object
-    var jvenue = JSON.parse((req.query[0]|| JSON.stringify(req.query['venue'])));
+    var jvenue = JSON.parse((req.query[0] || JSON.stringify(req.query['venue'])));
     //console.log("this is the jvenue:", jvenue);
-    var resp = function() {
+    var resp = function () {
         db.createVenue(new Venue.Venue(jvenue.name, jvenue.capacity,
-                                    jvenue.location, jvenue.genres));
+            jvenue.location, jvenue.genres));
         res.send('OK');
     }
-    
+
     // send a response to tell client to update the view
     resp();
-        
-    
-        
+
+
 });
 
 // Gets the list of genres from the database
