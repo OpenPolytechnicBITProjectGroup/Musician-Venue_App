@@ -49,23 +49,42 @@ describe('Venues', () => {
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('array');
-                res.body[0].should.be.a('object');
-                res.body[0].should.have.property('name');
-                res.body[0].name.should.be.a('string');
-                res.body[0].name.should.equal('The Grand');
-                res.body[0].should.have.property('capacity');
-                res.body[0].capacity.should.be.a('number');
-                res.body[0].capacity.should.equal(500);
-                res.body[0].should.have.property('location');
-                res.body[0].location.should.be.a('string');
-                res.body[0].location.should.equal('Wellington');
-                res.body[0].should.have.property('genres');
-                res.body[0].genres.should.be.a('array');
-                res.body[0].genres.length.should.be.eql(2);
-                res.body[0].genres[0].should.equal('Cheese');
-                res.body[0].genres[1].should.equal('Slapper');
                 
                 done();
             });
+        }));
+    });
+
+/*
+    * Test the GET /send_venue + parameter venue 
+    */
+    describe('GET /send_venue + param', () => {
+        
+        it('Should return response OK', (done => {
+            var venue = new Venue.Venue("The Grand", 500, "Wellington", ["Cheese", "Slapper"]);
+            chai.request(app.app)
+                .get('/send_venue').query({venue})
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.text.should.equal('OK');
+                    done();
+                }); 
+        }));
+    });    
+
+/*
+ * Test GET /genres
+ */
+    describe('GET /genre', () => {
+        it('Should return an array of genres', (done => {
+            chai.request(app.app)
+                .get('/genres')
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('array');
+                    expect(res.body[0]).to.be.a('string');
+                    expect(res.body[0]).to.equal('Alternative');
+                    done();
+                });
         }));
     });

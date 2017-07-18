@@ -1,12 +1,16 @@
 const express = require('express');
 const app = module.exports = express();
+const db = require('./server/db_api/db_api.js');
 
 /*
  * Morgan logs HTTP requests.
  */
 try {
     var morgan = require('morgan');
-    app.use(morgan("dev"));
+    if(process.env.NODE_ENV !== 'test'){
+        app.use(morgan("dev")); 
+    }
+    
 }
 catch (e) {
     if (e instanceof Error && e.code === "MODULE_NOT_FOUND")
@@ -27,6 +31,8 @@ app.set('port', (process.env.PORT || 5000));
 if(!module.parent) { // conditional to make sure tests are not trying to call listen twice
     app.listen(app.get('port'), function () {
     console.log('Started Server. Listening on ' + app.get('port'));
+    // initialise the database
+    db.initialise();
     });
 }
 module.exports = {app, routes};
