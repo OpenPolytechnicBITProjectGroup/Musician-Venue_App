@@ -53,7 +53,7 @@ function createVenue(venue) {
     const resultPromise = session.writeTransaction(tx => tx.run(
         "MERGE (v:Venue {name: {name}, capacity: {capacity}, \
                 location: {location}, genres: {genres}}) \
-                FOREACH (genreName in v.genres| MERGE (g:Genres \
+                FOREACH (genreName in {genres}| MERGE (g:Genre \
                     {name: genreName}) MERGE(v)-[:LIKES_GENRES]-(g)) \
                     RETURN v",
         {name: venue.name,
@@ -104,7 +104,7 @@ function createBand(band) {
 function getAllBands() {
 
 }
-
+// calls the Genres
 function getAllGenres() {
     var session = db.session();
     
