@@ -52,7 +52,10 @@ function createVenue(venue) {
     
     const resultPromise = session.writeTransaction(tx => tx.run(
         "MERGE (v:Venue {name: {name}, capacity: {capacity}, \
-                location: {location}, genres: {genres}}) RETURN v",
+                location: {location}, genres: {genres}}) \
+                FOREACH (genreName in v.genres| MERGE (g:Genres \
+                    {name: genreName}) MERGE(v)-[:LIKES_GENRES]-(g)) \
+                    RETURN v",
         {name: venue.name,
         capacity: venue.capacity,
         location: venue.location,
@@ -63,8 +66,10 @@ function createVenue(venue) {
     
     const singleRecord = result.records[0];
     const oneVenue = singleRecord.get(0);
-
-    console.log(oneVenue);
+    
+    if(process.env.NODE_ENV !== 'test'){
+        console.log(oneVenue);
+    }
     
     }).catch(error => {
         console.log(error);
