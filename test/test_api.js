@@ -20,7 +20,7 @@ chai.use(chaiHttp);
 // our parent block
 describe('Venues', () => {
     beforeEach((done) => { //before each test we can send test data
-    var venue = new Venue.Venue("The Grand", 500, "Wellington", ["Cheese", "Slapper"]);    
+    var venue = new Venue.Venue("The Grand", 500, "Wellington", ["Pop", "DJ/Electronic"]);    
     db.createVenue(venue);
     });
 });
@@ -135,7 +135,7 @@ describe('Venues', () => {
     describe('GET /send_venue + param', () => {
         
         it('Should return response OK', (done => {
-            var venue = new Venue.Venue("The Grand", 500, "Wellington", ["Cheese", "Slapper"]);
+            var venue = new Venue.Venue("The Grand", 500, "Wellington", ["Pop", "DJ/Electronic"]);
             chai.request(app)
                 .get('/send_venue').query({venue})
                 .end((err, res) => {
