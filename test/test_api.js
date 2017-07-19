@@ -4,7 +4,7 @@ process.env.NODE_ENV = 'test';
 // import dev-dependencies
 var chai = require('chai');
 var chaiHttp = require('chai-http');
-var app = require('../index.js');
+var app = require('../index.js').app;
 var _ = require('lodash');
 
 // get whats needed from api
@@ -30,10 +30,84 @@ describe('Venues', () => {
     */
     describe('GET /', () => {
         it('Should respond with a status 200', (done => {
-            chai.request(app.app)
+            chai.request(app)
             .get('/')
             .end((err, res) => {
                 res.should.have.status(200);
+                done();
+            });
+        }));
+        it('Should be a html file', (done => {
+            chai.request(app)
+            .get('/')
+            .end((err, res) => {
+                expect(res).to.be.html;
+                done();
+            })
+        }))
+    });
+
+/*
+    * Tests the GET /members route
+    */
+    describe('GET /members', () => {
+        it('Should return Response 200', (done => {
+            chai.request(app)
+            .get('/members')
+            .end((err,res) => {
+                res.should.have.status(200);
+                done();
+            });
+        }));
+        it('Should be a html file', (done => {
+            chai.request(app)
+            .get('/members')
+            .end((err, res) => {
+                expect(res).to.be.html;
+                done();
+            });
+        }));
+    });
+
+/*
+    * Test the GET /artists route
+    */
+    describe('GET /artists', () => {
+        it('Should return status 200', (done => {
+            chai.request(app)
+            .get('/artists')
+            .end((err, res) => {
+                res.should.have.status(200);
+                done();
+            });
+        }));
+        it('Should be a html file', (done => {
+            chai.request(app)
+            .get('/artists')
+            .end((err, res) => {
+                expect(res).to.be.html;
+                done();
+            });
+        }));
+    });
+
+/*
+    * Test the GET /venues route
+    */
+    describe('GET /venues', () => {
+        it('Should return status 200', (done => {
+            chai.request(app)
+            .get('/venues')
+            .end((err, res) => {
+                res.should.have.status(200);
+                done();
+            });
+        }));
+        it('Should be a html file', (done => {
+            chai.request(app)
+            .get('/venues')
+            .end((err, res) => {
+                expect(res).to.be.html;
                 done();
             });
         }));
@@ -44,7 +118,7 @@ describe('Venues', () => {
     */
     describe('GET /other_venues', () => {
         it('Should GET all the venues', (done => {
-            chai.request(app.app)
+            chai.request(app)
             .get('/other_venues')
             .end((err, res) => {
                 res.should.have.status(200);
@@ -62,7 +136,7 @@ describe('Venues', () => {
         
         it('Should return response OK', (done => {
             var venue = new Venue.Venue("The Grand", 500, "Wellington", ["Cheese", "Slapper"]);
-            chai.request(app.app)
+            chai.request(app)
                 .get('/send_venue').query({venue})
                 .end((err, res) => {
                     res.should.have.status(200);
@@ -77,7 +151,7 @@ describe('Venues', () => {
  */
     describe('GET /genre', () => {
         it('Should return an array of genres', (done => {
-            chai.request(app.app)
+            chai.request(app)
                 .get('/genres')
                 .end((err, res) => {
                     res.should.have.status(200);
