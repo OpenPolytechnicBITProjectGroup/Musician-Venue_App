@@ -65,7 +65,7 @@ app.service('VenueSvc', function ($http) {
 
 // Sends the Venue data
     this.sendVenues = function (venue) {
-        return $http.post('/api/venues', {params: venue})
+        return $http.post('/api/venues', venue)
             .then(function (resp) {
                 return resp;
             });

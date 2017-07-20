@@ -7,6 +7,11 @@ const express = require('express');
 const app = module.exports = express();
 require('dotenv').config();
 const db = require('./server/db_api/db_api.js');
+let bodyParser = require('body-parser');
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+    extended: true
+}));
 
 // Use this global var to avoid long relative paths :)
 global.__baseDir = __dirname;

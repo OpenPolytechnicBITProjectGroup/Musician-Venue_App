@@ -19,11 +19,10 @@ module.exports = {
         });
     },
     "store": function (req, res) {
-        // the params sent by client retrieved by req.query[0]
-        //console.log("Got a request:", (req.query[0]|| req.query['venue']));
-        // parse the JSON then create object
-        let jvenue = JSON.parse((req.query[0] || JSON.stringify(req.query['venue'])));
-        //console.log("this is the jvenue:", jvenue);
+        //TODO: Validate data before submitting into DB!
+        jvenue = req.body[0];
+
+        console.log(jvenue);
         let resp = function () {
             db.createVenue(new Venue.Venue(jvenue.name, jvenue.capacity,
                 jvenue.location, jvenue.genres));
