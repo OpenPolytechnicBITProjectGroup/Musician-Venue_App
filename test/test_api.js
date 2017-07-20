@@ -114,12 +114,12 @@ describe('Venues', () => {
     });
 
 /*
-    * Test the GET /other_venues route
+    * Test the GET /api/venues route (list of venues)
     */
-    describe('GET /other_venues', () => {
+    describe('GET /api/venues', () => {
         it('Should GET all the venues', (done => {
             chai.request(app)
-            .get('/other_venues')
+            .get('/api/venues')
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('array');
@@ -132,12 +132,12 @@ describe('Venues', () => {
 /*
     * Test the GET /send_venue + parameter venue 
     */
-    describe('GET /send_venue + param', () => {
+    describe('POST /api/venues + param', () => {
         
         it('Should return response OK', (done => {
             var venue = new Venue.Venue("The Grand", 500, "Wellington", ["Pop", "DJ/Electronic"]);
             chai.request(app)
-                .get('/send_venue').query({venue})
+                .post('/api/venues').query({venue})
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.text.should.equal('OK');
@@ -149,10 +149,10 @@ describe('Venues', () => {
 /*
  * Test GET /genres
  */
-    describe('GET /genre', () => {
+    describe('GET /api/genres', () => {
         it('Should return an array of genres', (done => {
             chai.request(app)
-                .get('/genres')
+                .get('/api/genres')
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('array');
