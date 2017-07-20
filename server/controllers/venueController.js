@@ -20,7 +20,9 @@ module.exports = {
     },
     "store": function (req, res) {
         //TODO: Validate data before submitting into DB!
-        jvenue = req.body[0];
+        // Validate client side first
+       
+        jvenue = (req.body[0] || req.query);
 
         console.log(jvenue);
         let resp = function () {

@@ -137,7 +137,7 @@ describe('Venues', () => {
         it('Should return response OK', (done => {
             var venue = new Venue.Venue("The Grand", 500, "Wellington", ["Pop", "DJ/Electronic"]);
             chai.request(app)
-                .post('/api/venues').query({venue})
+                .post('/api/venues').query(venue)
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.text.should.equal('OK');
