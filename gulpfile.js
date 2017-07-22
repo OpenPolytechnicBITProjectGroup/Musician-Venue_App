@@ -18,6 +18,8 @@ gulp.task('scripts', function () {
     return gulp.src([
         './node_modules/angular/angular.js',
         './node_modules/jquery/dist/jquery.js',
+        './client/js/bootstrapper.js',
+        './client/js/services/*.js',
         './client/js/controllers/*.js',
         './client/js/venues/*.js'
     ])
