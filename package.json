@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/OpenPolytechnicBITProjectGroup/Musician-Venue_App#readme",
   "dependencies": {
+    "angular": "^1.6.5",
     "body-parser": "^1.17.2",
     "bootstrap": "^3.3.7",
     "dotenv": "^4.0.0",
@@ -27,12 +28,14 @@
     "gulp": "^3.9.1",
     "gulp-less": "^3.3.2",
     "gulp-sourcemaps": "^2.6.0",
+    "jquery": "^3.2.1",
     "lodash": "^4.17.4",
     "neo4j-driver": "^1.4.0"
   },
   "devDependencies": {
     "chai": "^4.1.0",
     "chai-http": "^3.0.0",
+    "gulp-concat": "^2.6.1",
     "mocha": "^3.4.2",
     "morgan": "^1.8.2"
   }

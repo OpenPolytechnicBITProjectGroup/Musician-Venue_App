@@ -47,3 +47,49 @@ The branch \<dev\> is the current mainline for development, pull from this branc
 On completion of your code changes push your branch to the repository, `git push origin <your-branch>` and create pull request for merging.
 
 Siginificant updates to the app can be merged to production, which will auto-deploy to the [heroku hosted app](https://morning-escarpment-88913.herokuapp.com/), this requires a reviewed pull request before merging. The Heroku pipline can create a temporary review app for all open pull requests, but needs to be connected to the grapheneDB if api requests are required for testing.
+
+## Using Gulp
+### Installing
+Use the following command to install gulp globally. This will enable using gulp commands.
+```
+$ npm install -g gulp
+```
+
+### Compiling/Concatenating Javascript
+Gulp is currently set to concatenate the following files to ./client/js/package.js
+ - Angular (node_modules/angular/angular.js)
+ - jQuery (node_modules/jquery/dist/jquery.js)
+ - Angular Controllers (any file under ./client/js/controllers)
+ - Angular POJOs/models (currently ./client/js/venues)
+
+Use ./gulpfile.js to add more.
+
+Use the following command to manually process the above files:
+```
+$ gulp scripts
+```
+
+Gulp can also watch all files in ./client/js for changes and automatically process them when they're saved.
+Note: This will also watch less files.
+```
+$ gulp watch
+```
+
+### Compiling less
+Gulp compiles assets/less/style.less -> css/style.css
+
+Any files that are imported to that file @import() will automatically be included.
+ - bootstrap.custom.less - Includes all the bootstrap components we need from it's source. Uncomment lines in this file to add components.
+ - bootstrap.variables.less - Use this file to override variables used by bootstrap as it's compiled. (see bootstrap source)
+ - variables.less - Variables for use in our own less/css
+ - *.less - The rest of the files contain own css/less. Each new file has to be manually added with an @import() to style.less
+
+To compile all less files -> style.less, run the following command:
+```
+$ gulp less
+```
+
+As with the scripts, the less files are automatically watched for changes.
+```
+$ gulp watch
+```

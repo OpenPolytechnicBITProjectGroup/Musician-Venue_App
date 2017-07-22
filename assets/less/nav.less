@@ -1,8 +1,11 @@
-.brand {
+.brand, .img-brand {
   display: none;
 }
+
 .navbar-brand {
   display: inherit;
+  color: @orange-accent;
+
 }
 @media (min-width: @screen-md-min) {
   .brand {
@@ -14,6 +17,9 @@
     //font-weight: 700;
     line-height: normal;
     color: @orange-accent;
+  }
+  .img-brand {
+    display: inherit;
   }
 
   .navbar-brand {
