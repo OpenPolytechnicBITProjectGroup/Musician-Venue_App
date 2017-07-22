@@ -102,7 +102,7 @@
                                 <td><input type="text" ng-model="venue.name"/></td>
                                 <td><input type="number" ng-model="venue.capacity" min="0"/></td>
                                 <td><input type="text" ng-model="venue.location"/></td>
-                                <td><select ng-model="venue.genres" ng-options="genre for genre in db_genres">
+                                <td><select multiple ng-model="venue.genres" ng-options="genre for genre in db_genres">
                                     <option value="">--Select--</option>
                                 </select>
                                 </td>
@@ -140,7 +140,7 @@
                         <ul>
                             <li>Location: {{other_venue.location}}</li>
                             <li>Capacity: {{other_venue.capacity}}</li>
-                            <li>Location: {{other_venue.genres}}</li>
+                            <li>Preferred Genres: <span ng-repeat="genre in other_venue.genres">{{genre}} </span></li>
                         </ul>
                     </div>
                 </div>
