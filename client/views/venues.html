@@ -11,7 +11,8 @@
 <body ng-app="tester" ng-controller="MainCtrl">
 <header>
     <div class="brand">Music - Venue</div>
-    <img class="img-responsive center-block img-brand" src="http://via.placeholder.com/700x200" alt="Placeholder image" width="700px" height="200px">
+    <img class="img-responsive center-block img-brand" src="http://via.placeholder.com/700x200" alt="Placeholder image"
+         width="700px" height="200px">
 </header>
 
 <!-- Navigation -->
@@ -79,64 +80,76 @@
 
     </div>
 </nav>
-	
-<section ng-controller="VenueCtrl" class="venue-information">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="table-responsive">
-					<table id="results" class="table table-striped table-hover">
-						<thead>
-							<tr>
-								<th>Venue name</th>
-								<th>Capacity</th>
-								<th>Location</th>
-								<th>Preferred Genres</th>
-                                <th></th>
-							</tr>
-						</thead>
+
+<section ng-controller="VenueController" class="venue-information">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table id="results" class="table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th>Venue name</th>
+                            <th>Capacity</th>
+                            <th>Location</th>
+                            <th>Preferred Genres</th>
+                            <th></th>
+                        </tr>
+                        </thead>
                         <tbody>
-							<tr>
-                                <form novalidate class="simple-form">
-								<td><input type="text" ng-model="venue.name" /></td>
-								<td><input type="number" ng-model="venue.capacity" min="0" /></td>
-								<td><input type="text" ng-model="venue.location" /></td>
-								<td><select ng-model="venue.genres" ng-options="genre for genre in db_genres">
-                                        <option value="">--Select--</option>
-                                    </select>
+                        <tr>
+                            <form novalidate class="simple-form">
+                                <td><input type="text" ng-model="venue.name"/></td>
+                                <td><input type="number" ng-model="venue.capacity" min="0"/></td>
+                                <td><input type="text" ng-model="venue.location"/></td>
+                                <td><select ng-model="venue.genres" ng-options="genre for genre in db_genres">
+                                    <option value="">--Select--</option>
+                                </select>
                                 </td>
                                 <td>
                                     <button ng-click="sendVenue(venue)">Submit Venue</button>
                                 </td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-                <div class="table-responsive">
-					<table id="results" class="table table-striped table-hover">
-						<thead>
-							<tr>
-								<th>Venue name</th>
-								<th>Capacity</th>
-								<th>Location</th>
-								<th>Preferred Genres</th>
-							</tr>
-						</thead>
-                        <tbody>     
-							<tr ng-repeat="other_venue in other_venues">
-                                <td>{{other_venue.name}}</td>
-                                <td><pre>{{other_venue.capacity}}</pre></td>
-								<td><pre>{{other_venue.location}}</pre></td>
-								<td><pre>{{other_venue.genres}}</pre></td>
-                            </tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
+                            </form>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--<div class="table-responsive">-->
+                    <!--&lt;!&ndash;<table id="results" class="table table-striped table-hover">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<thead>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<th>Venue name</th>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<th>Capacity</th>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<th>Location</th>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<th>Preferred Genres</th>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</thead>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<tbody>     &ndash;&gt;-->
+                    <!--&lt;!&ndash;<tr ng-repeat="other_venue in other_venues">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<td>{{other_venue.name}}</td>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<td><pre>{{other_venue.capacity}}</pre></td>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<td><pre>{{other_venue.location}}</pre></td>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<td><pre>{{other_venue.genres}}</pre></td>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</tbody>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</table>&ndash;&gt;-->
+                <!--</div>-->
+                <div class="col-xs-12 col-md-6 col-lg-3" ng-repeat="other_venue in other_venues" >
+                    <div class="card">
+                        <h4>{{other_venue.name}}</h4>
+                        <ul>
+                            <li>Location: {{other_venue.location}}</li>
+                            <li>Capacity: {{other_venue.capacity}}</li>
+                            <li>Location: {{other_venue.genres}}</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </section>
-	
+
 <style type="text/css">
     .node {
         stroke: #222;
