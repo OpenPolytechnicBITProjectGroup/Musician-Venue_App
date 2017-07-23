@@ -15,6 +15,7 @@ const path = require('path');
  */
 router.use('/css', express.static(__baseDir + '/client/public/css'));
 router.use('/js', express.static(__baseDir + '/client/public/js'));
+router.use('/views', express.static(__baseDir + '/client/public/views'));
 
 /*
  * Catch-all to pass routing over to angular.
@@ -25,16 +26,6 @@ router.get('*', function (req, res) {
 });
 
 
-// Temporary fixed routes to HTML files. We'll probably be using Angular routing instead.
-router.get('/venues', function (req, res) {
-    res.sendFile(__baseDir + '/client/views/venues.html');
-});
-router.get('/artists', function (req, res) {
-    res.sendFile(__baseDir + '/client/views/artists.html');
-});
-router.get('/members', function (req, res) {
-    res.sendFile(__baseDir + '/client/views/members.html');
-});
 
 
 module.exports = router;

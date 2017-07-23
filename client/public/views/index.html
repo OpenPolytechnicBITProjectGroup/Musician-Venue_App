@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en_GB">
+<html lang="en_GB" ng-app="app">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,16 +32,16 @@
         <div class="collapse navbar-collapse" id="main-navbar-collapse">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="/">Home</a>
+                    <a href="">Home</a>
                 </li>
                 <li>
-                    <a href="/artists">Browse Artists</a>
+                    <a href="artists">Browse Artists</a>
                 </li>
                 <li>
-                    <a href="/venues">Browse Venues</a>
+                    <a href="venues">Browse Venues</a>
                 </li>
                 <li>
-                    <a href="/members">Members Area</a>
+                    <a href="members">Members Area</a>
                 </li>
             </ul>
         </div>
@@ -49,6 +49,11 @@
     </div>
     <!-- /.container -->
 </nav>
+
+<main ng-view>
+
+</main>
+
 <!--jQuery js file has to be loaded last. :/ -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 

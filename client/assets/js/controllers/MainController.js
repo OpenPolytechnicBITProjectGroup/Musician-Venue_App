@@ -16,12 +16,14 @@ app.factory("Test", [function () {
 }]);
 
 // The Main Controller
+// todo: Are these used or needed?
 app.controller('MainCtrl', function ($scope, Test) {
     $scope.bands = Test.all();
 
 });
 
-// A test controller   
+// A test controller
+// todo: Are these used or needed?
 app.controller('WorkingCtrl', function ($scope, Test) {
     $scope.working = Test.working();
 });
