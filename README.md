@@ -56,11 +56,17 @@ $ npm install -g gulp
 ```
 
 ### Compiling/Concatenating Javascript
+
+**Don't edit package.js manually. It is created by gulp. Edit the files in ./client/assets/js instead**
+
 Gulp is currently set to concatenate the following files to ./client/js/package.js
  - Angular (node_modules/angular/angular.js)
+ - Angular-route (node_modules/angular-route/angular-route.js)
  - jQuery (node_modules/jquery/dist/jquery.js)
- - Angular Controllers (any file under ./client/js/controllers)
- - Angular POJOs/models (currently ./client/js/venues)
+ - Bootstraper file (creates ng module) (./client/assets/js/bootstrapper.js)
+ - Angular Controllers (any file under ./client/assets/js/controllers)
+ - Angular POJOs/models (currently ./client/assets/js/venues)
+ - Angular routes (./client/assets/js/routes.js)
 
 Use ./gulpfile.js to add more.
 
