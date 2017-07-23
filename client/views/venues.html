@@ -16,7 +16,7 @@
 </header>
 
 <!-- Navigation -->
-<nav class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-default">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -52,7 +52,7 @@
 </nav>
 
 
-<nav role="navigation" class="navbar navbar-default navbar-static-top">
+<nav class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="http://neo4j.com/developer/resources">
@@ -114,26 +114,6 @@
                         </tbody>
                     </table>
                 </div>
-                <!--<div class="table-responsive">-->
-                    <!--&lt;!&ndash;<table id="results" class="table table-striped table-hover">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<thead>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<th>Venue name</th>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<th>Capacity</th>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<th>Location</th>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<th>Preferred Genres</th>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</thead>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<tbody>     &ndash;&gt;-->
-                    <!--&lt;!&ndash;<tr ng-repeat="other_venue in other_venues">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<td>{{other_venue.name}}</td>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<td><pre>{{other_venue.capacity}}</pre></td>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<td><pre>{{other_venue.location}}</pre></td>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<td><pre>{{other_venue.genres}}</pre></td>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</tbody>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</table>&ndash;&gt;-->
-                <!--</div>-->
                 <div class="col-xs-12 col-md-6 col-lg-3" ng-repeat="other_venue in other_venues" >
                     <div class="card">
                         <h4>{{other_venue.name}}</h4>
@@ -150,31 +130,6 @@
     </div>
 </section>
 
-<style type="text/css">
-    .node {
-        stroke: #222;
-        stroke-width: 1.5px;
-    }
-
-    .node.actor {
-        fill: #888;
-    }
-
-    .node.movie {
-        fill: #BBB;
-    }
-
-    .link {
-        stroke: #999;
-        stroke-opacity: .6;
-        stroke-width: 1px;
-    }
-
-    .navbar-brand {
-        padding: 0;
-        line-height: 50px;
-    }
-</style>
 
 <!--jQuery js file has to be loaded last. :/ -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
