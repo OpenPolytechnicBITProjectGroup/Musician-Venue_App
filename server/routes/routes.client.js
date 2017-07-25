@@ -13,25 +13,19 @@ const path = require('path');
  * Ensure any files routed this way have NO sensitive information such as passwords as they will be available
  * to the public
  */
-router.use('/css', express.static(__baseDir + '/client/css'));
-router.use('/js', express.static(__baseDir + '/client/js'));
+router.use('/css', express.static(__baseDir + '/client/public/css'));
+router.use('/js', express.static(__baseDir + '/client/public/js'));
+router.use('/views', express.static(__baseDir + '/client/public/views'));
 
-// Route the root url to the index.html file.
-router.get('/', function (req, res) {
-    res.sendFile(__baseDir + '/client/views/index.html');
+/*
+ * Catch-all to pass routing over to angular.
+ * Every request that IS NOT to the API or to a route declared ABOVE this line will end up in this route.
+ */
+router.get('*', function (req, res) {
+    res.sendFile(__baseDir + '/client/public/views/index.html');
 });
 
 
-// Temporary fixed routes to HTML files. We'll probably be using Angular routing instead.
-router.get('/venues', function (req, res) {
-    res.sendFile(__baseDir + '/client/views/venues.html');
-});
-router.get('/artists', function (req, res) {
-    res.sendFile(__baseDir + '/client/views/artists.html');
-});
-router.get('/members', function (req, res) {
-    res.sendFile(__baseDir + '/client/views/members.html');
-});
 
 
 module.exports = router;

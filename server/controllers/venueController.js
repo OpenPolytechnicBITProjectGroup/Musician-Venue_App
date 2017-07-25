@@ -1,5 +1,5 @@
-var db = require(__baseDir + '/server/db_api/db_api.js');
-var Venue = require(__baseDir + '/server/db_api/venue.js');
+let db = require(__baseDir + '/server/db_api/db_api.js');
+let Venue = require(__baseDir + '/server/db_api/venue.js');
 
 module.exports = {
     "index": function (req, res) {
@@ -22,7 +22,7 @@ module.exports = {
         //TODO: Validate data before submitting into DB!
         // Validate client side first
        
-        jvenue = (req.body[0]);
+        let jvenue = (req.body[0]);
 
         console.log(jvenue);
         let resp = function () {
