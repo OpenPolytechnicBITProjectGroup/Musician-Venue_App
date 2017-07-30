@@ -169,3 +169,29 @@ describe('GET /api/genres', () => {
             });
     }));
 });
+
+/**
+ * Test the GET /searchByGenres route
+ */
+describe('GET /api/searchByGenres', () => {
+    it('should return status 200', (done => {
+        chai.request(app)
+            .get('/api/searchByGenres')
+            .query({0: 'Pop'})
+            .end((err, res) => {
+                res.should.have.status(200);
+                done();
+            });
+    }));
+
+    it('should return an array', (done => {
+        chai.request(app)
+            .get('/api/searchByGenres')
+            .query({0: 'Pop'})
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('array');
+                done();
+            })
+    }))
+});

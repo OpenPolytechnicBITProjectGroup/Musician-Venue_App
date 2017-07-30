@@ -16,7 +16,7 @@ app.factory("Test", [function () {
 }]);
 
 // The Main Controller
-// todo: Are these used or needed?
+// todo: Are these used or needed? they were testers
 app.controller('MainCtrl', function ($scope, Test) {
     $scope.bands = Test.all();
 

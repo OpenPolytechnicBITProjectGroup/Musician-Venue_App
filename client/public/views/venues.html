@@ -1,29 +1,19 @@
-<nav class="navbar navbar-default navbar-static-top">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="http://neo4j.com/developer/resources">
-                <img height="100%" class="pull-left"
-                     src="https://neo4j-contrib.github.io/developer-resources/language-guides/assets/img/logo-white.svg"
-                     alt="Neo4j World's Leading Graph Database" id="logo">
-                The Band List
-            </a>
-
-        </div>
+<nav ng-controller="SearchController" class="navbar navbar-default navbar-static-top">
+    <div class="container">      
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li>
                     <form role="search" class="navbar-form" id="search">
                         <div class="form-group">
-                            <input type="text" value="Rock" placeholder="Search for Genre" class="form-control"
-                                   name="search">
+                            <select multiple ng-model="search.genre" ng-options="genre for genre in db_genres">
+                                            <option value="">--Select--</option>
+                                        </select>
                         </div>
-                        <button class="btn btn-default" type="submit">Search</button>
+                        <button class="btn btn-default" ng-click="searchVenue(search)">Search</button>
                     </form>
                 </li>
             </ul>
         </div>
-
-
     </div>
 </nav>
 
@@ -34,29 +24,29 @@
                 <div class="table-responsive">
                     <table id="results" class="table table-striped table-hover">
                         <thead>
-                        <tr>
-                            <th>Venue name</th>
-                            <th>Capacity</th>
-                            <th>Location</th>
-                            <th>Preferred Genres</th>
-                            <th></th>
-                        </tr>
+                            <tr>
+                                <th>Venue name</th>
+                                <th>Capacity</th>
+                                <th>Location</th>
+                                <th>Preferred Genres</th>
+                                <th></th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <form novalidate class="simple-form">
-                                <td><input type="text" ng-model="venue.name"/></td>
-                                <td><input type="number" ng-model="venue.capacity" min="0"/></td>
-                                <td><input type="text" ng-model="venue.location"/></td>
-                                <td><select multiple ng-model="venue.genres" ng-options="genre for genre in db_genres">
-                                    <option value="">--Select--</option>
-                                </select>
-                                </td>
-                                <td>
-                                    <button ng-click="sendVenue(venue)">Submit Venue</button>
-                                </td>
-                            </form>
-                        </tr>
+                            <tr>
+                                <form novalidate class="simple-form">
+                                    <td><input type="text" ng-model="venue.name"/></td>
+                                    <td><input type="number" ng-model="venue.capacity" min="0"/></td>
+                                    <td><input type="text" ng-model="venue.location"/></td>
+                                    <td><select multiple ng-model="venue.genres" ng-options="genre for genre in db_genres">
+                                            <option value="">--Select--</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <button ng-click="sendVenue(venue)">Submit Venue</button>
+                                    </td>
+                                </form>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -70,7 +60,6 @@
                         </ul>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

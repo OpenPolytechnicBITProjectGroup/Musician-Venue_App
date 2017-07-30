@@ -45315,6 +45315,16 @@ return jQuery;
 
 var app = angular.module('app', ['ngRoute']);
 
+app.service('SearchService', function($http) {
+    
+    // sends "genre search value" to the api
+    this.searchByGenre = function(search) {
+        return $http.get('/api/searchByGenres', {params: search})
+        .then(function (resp){
+            return resp;
+        })
+    }
+});
 // Service functions for Venue section
 app.service('VenueService', function ($http) {
     // get_venues function
@@ -45357,12 +45367,14 @@ app.factory("Test", [function () {
 }]);
 
 // The Main Controller
+// todo: Are these used or needed? they were testers
 app.controller('MainCtrl', function ($scope, Test) {
     $scope.bands = Test.all();
 
 });
 
-// A test controller   
+// A test controller
+// todo: Are these used or needed?
 app.controller('WorkingCtrl', function ($scope, Test) {
     $scope.working = Test.working();
 });
@@ -45372,19 +45384,43 @@ app.controller('WorkingCtrl', function ($scope, Test) {
 
 
 /*
+ * This is the controller for the Search bar
+ */
+
+ app.controller('SearchController', ['$rootScope', '$scope', '$http', 'SearchService', 'VenueService', 
+                            function ($rootScope, $scope, $http, SearchService, VenueService) {
+    
+    // Use the getGenres() to get a list to search 
+    VenueService.getGenres().then(function (resp) {
+        $scope.db_genres = resp.data;
+    });
+
+    // takes the selected genre and sends to the api via the service
+    $scope.searchVenue = function(search) {
+         
+        SearchService.searchByGenre(search.genre).then(function (resp) {
+                $rootScope.other_venues = resp.data;          
+        });
+    }
+
+ }]);
+
+
+/*
  * This controller is hooked to the entire venue section
  * it controls both venue tables, the top being send data
  * the bottom table is received from database
  */
 
-app.controller('VenueController', ['$scope', '$http', 'VenueService', function ($scope, $http, VenueService) {
+app.controller('VenueController', ['$rootScope', '$scope', '$http', 'VenueService', 
+                        function ($rootScope, $scope, $http, VenueService) {
 
     // This acts like a submission form..
     $scope.venues = addTestVenues($scope, $http, VenueService);
 
     // Send request to server on first load of page and return
     VenueService.getVenues().then(function (resp) {
-        $scope.other_venues = resp.data;
+        $rootScope.other_venues = resp.data;
     });
 
     // Get the list of genres
@@ -45394,7 +45430,7 @@ app.controller('VenueController', ['$scope', '$http', 'VenueService', function (
 }]);
 
 // Accepts input from submission form
-function addTestVenues($scope, $http, VenueService) {
+function addTestVenues($rootScope, $scope, $http, VenueService) {
     var venues = [];
     //Receives input from form, when submit button is clicked
     // the sendVenue function is activated.
@@ -45412,7 +45448,7 @@ function addTestVenues($scope, $http, VenueService) {
                 // response is OK so update the venue List
                 VenueService.getVenues().then(function (resp) {
                     console.log('Updating venues with:', resp.data); // another dev log
-                    $scope.other_venues = resp.data;
+                    $rootScope.other_venues = resp.data;
                 });
             }
         });
