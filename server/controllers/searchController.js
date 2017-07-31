@@ -2,7 +2,7 @@ let db = require(__baseDir + '/server/db_api/db_api.js');
 let Venue = require(__baseDir + '/server/db_api/venue.js');
 
 module.exports = {
-    "index": function (req, res) {
+    searchResults: function (req, res) {
         "use strict";
         let send = [];
         
@@ -19,6 +19,10 @@ module.exports = {
             }
             res.send(send)
         });
+        }
+        else {
+            // 501: Not implemented
+            res.sendStatus(501);
         }
         
     }
