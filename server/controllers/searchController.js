@@ -6,7 +6,8 @@ module.exports = {
         "use strict";
         let send = [];
         
-        db.searchVenueByGenre(req.query[0]).then(venues => {
+        if (req.query['type'] === 'venue') {
+            db.searchVenueByGenre(req.query['genre']).then(venues => {
             if (venues) {
                 venues.forEach(venue => {
                     send.push(new Venue.Venue(
@@ -18,5 +19,7 @@ module.exports = {
             }
             res.send(send)
         });
+        }
+        
     }
 }

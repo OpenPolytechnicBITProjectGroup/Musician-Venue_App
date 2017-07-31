@@ -20,6 +20,6 @@ router.post('/venues', venueController.store);
 router.get('/genres', genreController.index);
 
 // searched for genres
-router.get('/searchByGenres', searchController.index);
+router.get('/search', searchController.index);
 
 module.exports = router;
