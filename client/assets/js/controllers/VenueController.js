@@ -8,7 +8,7 @@ app.controller('VenueController', ['$rootScope', '$scope', '$http', 'VenueServic
                         function ($rootScope, $scope, $http, VenueService) {
 
     // This acts like a submission form..
-    $scope.venues = addTestVenues($scope, $http, VenueService);
+    $scope.venues = addTestVenues($rootScope, $scope, $http, VenueService);
 
     // Send request to server on first load of page and return
     VenueService.getVenues().then(function (resp) {
