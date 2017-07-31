@@ -184,6 +184,15 @@ describe('GET /api/search', () => {
             });
     }));
 
+    it('should return status 501 if no parameter is sent', (done => {
+        chai.request(app)
+            .get('/api/search')
+            .end((err, res) => {
+                res.should.have.status(501);
+                done()
+            });
+    }));
+
     it('should return an array', (done => {
         chai.request(app)
             .get('/api/search')
