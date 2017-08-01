@@ -4,14 +4,15 @@
  * the bottom table is received from database
  */
 
-app.controller('VenueController', ['$scope', '$http', 'VenueService', function ($scope, $http, VenueService) {
+app.controller('VenueController', ['$rootScope', '$scope', '$http', 'VenueService', 
+                        function ($rootScope, $scope, $http, VenueService) {
 
     // This acts like a submission form..
-    $scope.venues = addTestVenues($scope, $http, VenueService);
+    $scope.venues = addTestVenues($rootScope, $scope, $http, VenueService);
 
     // Send request to server on first load of page and return
     VenueService.getVenues().then(function (resp) {
-        $scope.other_venues = resp.data;
+        $rootScope.other_venues = resp.data;
     });
 
     // Get the list of genres
@@ -21,7 +22,7 @@ app.controller('VenueController', ['$scope', '$http', 'VenueService', function (
 }]);
 
 // Accepts input from submission form
-function addTestVenues($scope, $http, VenueService) {
+function addTestVenues($rootScope, $scope, $http, VenueService) {
     var venues = [];
     //Receives input from form, when submit button is clicked
     // the sendVenue function is activated.
@@ -39,7 +40,7 @@ function addTestVenues($scope, $http, VenueService) {
                 // response is OK so update the venue List
                 VenueService.getVenues().then(function (resp) {
                     console.log('Updating venues with:', resp.data); // another dev log
-                    $scope.other_venues = resp.data;
+                    $rootScope.other_venues = resp.data;
                 });
             }
         });

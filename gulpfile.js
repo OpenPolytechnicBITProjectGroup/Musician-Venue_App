@@ -33,7 +33,7 @@ gulp.task('scripts', function () {
 // Watch scss folder for changes
 gulp.task('watch', function () {
     gulp.watch("client/assets/less/*", ['less']);
-    gulp.watch("client/assets/js/*", ['scripts'])
+    gulp.watch("client/assets/js/**/*", ['scripts']) // watches all subdirectories and files in ./assets/js/
 });
 
-gulp.task('default', ['less','scripts']);
+gulp.task('default', ['watch']);

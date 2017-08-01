@@ -126,6 +126,29 @@ function getAllGenres() {
     });
 }
 
+// Get Venues searched by Genre
+function searchVenueByGenre(genre) {
+    var session = db.session();
+
+    const resultPromise = session.readTransaction(tx => tx.run(
+        'MATCH (v:Venue)-[:LIKES_GENRES]->(g:Genre) \
+        WHERE (g.name) = {genre} \
+        RETURN v AS venue',
+        {
+            genre: genre
+        }
+    ));
+    return resultPromise.then(result => {
+        session.close();
+
+        return result.records.map(record => {
+            return new Venue.NodeVenue(record.get('venue'));
+        });
+    }).catch(error => {
+        console.log(error);
+    });
+}
+
 /*
  * Loads CSV files of essential data if not already in existance
  * within the database
@@ -161,9 +184,10 @@ exports.createVenue = createVenue;
 exports.getAllBands = getAllBands;
 exports.getAllVenues = getAllVenues;
 exports.getAllGenres = getAllGenres;
+exports.searchVenueByGenre = searchVenueByGenre
 exports.initialise = initialise;
 
 module.exports = {
     test, db, neo4j, createBand,
-    createVenue, getAllBands, getAllVenues, getAllGenres, initialise
+    createVenue, getAllBands, getAllVenues, getAllGenres, searchVenueByGenre, initialise
 };

@@ -16,7 +16,7 @@ app.factory("Test", [function () {
 }]);
 
 // The Main Controller
-// todo: Are these used or needed?
+// todo: Are these used or needed? they were testers and can be removed if we dont need them
 app.controller('MainCtrl', function ($scope, Test) {
     $scope.bands = Test.all();
 
