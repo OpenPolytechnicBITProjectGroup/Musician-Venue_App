@@ -64,7 +64,7 @@ if (!module.parent) { // conditional to make sure tests are not trying to call l
     app.listen(app.get('port'), function () {
         console.log('Started Server. Listening on ' + app.get('port'));
         // initialise the database
-        // db.initialise();
+        db.initialise();
     });
 }
 module.exports = {app, routes: {serverRoutes, clientRoutes}};
