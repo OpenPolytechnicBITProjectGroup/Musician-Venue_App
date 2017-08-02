@@ -36,7 +36,7 @@ function addTestVenues($rootScope, $scope, $http, VenueService) {
         VenueService.sendVenues(venues).then(function (res) {
 
             console.log("response returned:", res); // developer log file
-            if (res.data === 'OK') {
+            if (res.data === 'Created') {
                 // response is OK so update the venue List
                 VenueService.getVenues().then(function (resp) {
                     console.log('Updating venues with:', resp.data); // another dev log
