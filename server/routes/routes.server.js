@@ -11,6 +11,11 @@ let venueController = require(__baseDir + "/server/controllers/venueController.j
 let genreController = require(__baseDir + "/server/controllers/genreController.js");
 let searchController = require(__baseDir + "/server/controllers/searchController.js");
 
+router.use(function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    next();
+});
+
 router.get('/venues', venueController.index);
 router.post('/venues', venueController.store);
 
