@@ -75,7 +75,6 @@ function initialise() {
 }
 
 exports.db = db;
-
-// Don't think these are needed anymore..
-// exports.initialise = initialise();
+exports.initialise = initialise();
+// test() is probably not needed any more..
 // exports.test = test();
