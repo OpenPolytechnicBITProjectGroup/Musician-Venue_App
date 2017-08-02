@@ -5,7 +5,8 @@ function Venue(name, capacity, location, genres) {
 		this.name = name;
 		this.capacity = capacity;
 		this.location = location;
-		this.genres = genres;
+		this.genres = [];
+		this.genres = _.concat(this.genres, genres);
 }
 
 // Constructor for Venue objects from the database.
