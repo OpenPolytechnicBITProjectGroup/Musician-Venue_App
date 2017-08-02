@@ -4,7 +4,7 @@
  * the bottom table is received from database
  */
 
-app.controller('VenueController', ['$rootScope', '$scope', '$http', 'VenueService', 
+app.controller('VenueController', ['$rootScope', '$scope', '$http', 'VenueService',
                         function ($rootScope, $scope, $http, VenueService) {
 
     // This acts like a submission form..

@@ -2,21 +2,29 @@ var gulp = require('gulp');
 var less = require('gulp-less');
 var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
+var cssmin = require('gulp-cssmin');
+var rename = require('gulp-rename');
+var uglify = require('gulp-uglify');
 
-
-// Compile less to css
+// Compiles less -> css. Creates sourcemaps then minifies.
 gulp.task('less', function () {
     gulp.src("client/assets/less/style.less")
         .pipe(sourcemaps.init())
-        .pipe(less())
+        .pipe(less().on('error', function (err) {
+            console.log(err);
+        }))
+        .pipe(cssmin().on('error', function (err) {
+            console.log(err);
+        }))
+        .pipe(rename({suffix: '.min'}))
         .pipe(sourcemaps.write(""))
-        .pipe(gulp.dest('client/css'));
+        .pipe(gulp.dest('client/public/css'));
 });
 
-// Concatenate/package js files
+// Concatenate/package js files, creates sourcemaps then minifies.
 gulp.task('scripts', function () {
     return gulp.src([
-        './node_modules/angular/angular.js',
+        './node_modules/angular/angular.min.js',
         './node_modules/angular-route/angular-route.js',
         './node_modules/jquery/dist/jquery.js',
         './client/assets/js/bootstrapper.js',
@@ -25,7 +33,15 @@ gulp.task('scripts', function () {
         './client/assets/js/venues/*.js',
         './client/assets/js/routes.js'
     ])
-        .pipe(concat('package.js'))
+        .pipe(sourcemaps.init())
+        .pipe(concat('package.js').on('error', function (err) {
+            console.log(err);
+        }))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(uglify({mangle: false}).on('error', function (err) {
+            console.log(err);
+        }))
+        .pipe(sourcemaps.write(""))
         .pipe(gulp.dest('./client/public/js/'));
 });
 
