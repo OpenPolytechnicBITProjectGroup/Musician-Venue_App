@@ -28,7 +28,7 @@ module.exports = {
         let resp = function () {
             db.createVenue(new Venue.Venue(jvenue.name, jvenue.capacity,
                 jvenue.location, jvenue.genres));
-            res.send('OK');
+            res.sendStatus(200);
             // TODO: Come up with a global function to send json messages via HTTP like res.send(message.OK)
         };
 
