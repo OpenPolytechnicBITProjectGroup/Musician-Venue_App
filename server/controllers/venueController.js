@@ -26,7 +26,6 @@ module.exports = {
 
         // TODO: Come up with a global function to send json messages via HTTP like res.send(message.OK)
 
-
         // send a response to tell client to update the view
 
     }
