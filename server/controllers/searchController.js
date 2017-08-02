@@ -1,29 +1,25 @@
-let db = require(__baseDir + '/server/db_api/db_api.js');
-let Venue = require(__baseDir + '/server/db_api/venue.js');
+let db = require(__baseDir + '/server/db_api/Database.js');
+let VenueModel = require(__baseDir + '/server/db_api/VenueModel.js');
 
 module.exports = {
     searchResults: function (req, res) {
         "use strict";
-        let send = [];
-        
-        if (req.query['type'] === 'venue') {
-            db.searchVenueByGenre(req.query['genre']).then(venues => {
-            if (venues) {
-                venues.forEach(venue => {
-                    send.push(new Venue.Venue(
-                        venue.name, venue.capacity,
-                        venue.location, venue.genres
-                    ));
+        let responseArray = [];
 
-                });
-            }
-            res.send(send)
-        });
+        if (req.query['type'] === 'venue') {
+            VenueModel.getByGenre(req.query['genre']).then(venues => {
+                if (venues) {
+                    venues.forEach(venue => {
+                        responseArray.push(venue);
+                    });
+                }
+                res.send(responseArray);
+            });
         }
         else {
             // 501: Not implemented
             res.sendStatus(501);
         }
-        
+
     }
-}
+};
