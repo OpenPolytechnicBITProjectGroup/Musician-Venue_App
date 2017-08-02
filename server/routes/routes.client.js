@@ -13,9 +13,9 @@ const path = require('path');
  * Ensure any files routed this way have NO sensitive information such as passwords as they will be available
  * to the public
  */
-router.use('/css', express.static(__baseDir + '/client/public/css'));
-router.use('/js', express.static(__baseDir + '/client/public/js'));
-router.use('/views', express.static(__baseDir + '/client/public/views'));
+router.use('/css/', express.static(__baseDir + '/client/public/css/'));
+router.use('/js/', express.static(__baseDir + '/client/public/js/'));
+router.use('/views/', express.static(__baseDir + '/client/public/views'));
 
 /*
  * Catch-all to pass routing over to angular.
