@@ -2,26 +2,27 @@
 process.env.NODE_ENV = 'test';
 
 // import dev-dependencies
-var chai = require('chai');
-var chaiHttp = require('chai-http');
-var app = require('../index.js').app;
-var _ = require('lodash');
+let chai = require('chai');
+let chaiHttp = require('chai-http');
+let app = require('../index.js').app;
+let _ = require('lodash');
 
 // get whats needed from api
-var db = require('../server/db_api/db_api.js');
-var Venue = require('../server/db_api/venue.js');
+let db = require('../server/db_api/Database.js');
+let VenueModel = require('../server/db_api/VenueModel');
+let GenreModel = require('../server/db_api/GenreModel');
 
 
 // Add the chai assertions
-var should = chai.Should();
-var expect = chai.expect;
+let should = chai.Should();
+let expect = chai.expect;
 
 chai.use(chaiHttp);
 // our parent block
 describe('Venues', () => {
     beforeEach((done) => { //before each test we can send test data
-        var venue = new Venue.Venue("The Grand", 500, "Wellington", ["Pop", "DJ/Electronic"]);
-        db.createVenue(venue);
+        let venue = new VenueModel.Venue("The Grand", 500, "Wellington", ["Pop", "DJ/Electronic"]);
+        VenueModel.create(venue);
     });
 });
 
@@ -134,8 +135,8 @@ describe('GET /api/venues', () => {
     */
 describe('POST /api/venues + param', () => {
 
-    it('Should return response OK', (done => {
-        // var venue = new Venue.Venue("The Grand", 500, "Wellington", ["Pop", "DJ/Electronic"]);
+    it('Should return response 201 CREATED', (done => {
+        // let venue = new Venue.Venue("The Grand", 500, "Wellington", ["Pop", "DJ/Electronic"]);
         chai.request(app)
             .post('/api/venues')
             .type('form')
@@ -146,8 +147,7 @@ describe('POST /api/venues + param', () => {
                 "genres": ["Pop", "DJ/Electronic"]
             }])
             .end((err, res) => {
-                res.should.have.status(200);
-                res.text.should.equal('OK');
+                res.should.have.status(201);
                 done();
             });
     }));

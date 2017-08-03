@@ -6,7 +6,7 @@ const express = require('express');
 //TODO: Isn't this line overwritten by the last line?
 const app = module.exports = express();
 require('dotenv').config();
-const db = require('./server/db_api/db_api.js');
+const db = require('./server/db_api/Database.js');
 let bodyParser = require('body-parser');
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies

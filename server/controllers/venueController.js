@@ -1,39 +1,32 @@
-let db = require(__baseDir + '/server/db_api/db_api.js');
-let Venue = require(__baseDir + '/server/db_api/venue.js');
+let VenueModel = require(__baseDir + '/server/db_api/VenueModel.js');
 
 module.exports = {
-    "index": function (req, res) {
+    index: function (req, res) {
         "use strict";
-        let send = [];
-        db.getAllVenues().then(venues => {
+        let responseArray = [];
+        VenueModel.getAll().then(venues => {
             if (venues) {
                 venues.forEach(venue => {
-                    send.push(new Venue.Venue(
-                        venue.name, venue.capacity,
-                        venue.location, venue.genres
-                    ));
-
+                    responseArray.push(venue);
                 });
             }
-            res.send(send)
+            res.send(responseArray);
         });
     },
-    "store": function (req, res) {
+    store: function (req, res) {
         //TODO: Validate data before submitting into DB!
         // Validate client side first
-       
-        let jvenue = (req.body[0]);
+        v = req.body[0];
+        let venue = new VenueModel.Venue(v.name, v.capacity, v.location, v.genres);
+        console.log(venue);
 
-        console.log(jvenue);
-        let resp = function () {
-            db.createVenue(new Venue.Venue(jvenue.name, jvenue.capacity,
-                jvenue.location, jvenue.genres));
-            res.sendStatus(200);
-            // TODO: Come up with a global function to send json messages via HTTP like res.send(message.OK)
-        };
+        VenueModel.create(venue).then(function () {
+            res.sendStatus(201);
+        });
+
+        // TODO: Come up with a global function to send json messages via HTTP like res.send(message.OK)
 
         // send a response to tell client to update the view
-        resp();
 
     }
 };
