@@ -12,7 +12,7 @@ app.controller('VenueController', ['$rootScope', '$scope', '$http', 'VenueServic
 
     // Send request to server on first load of page and return
     VenueService.getVenues().then(function (resp) {
-        $rootScope.other_venues = resp.data;
+        $rootScope.response_venues = resp.data;
     });
 
     // Get the list of genres
@@ -40,7 +40,7 @@ function addTestVenues($rootScope, $scope, $http, VenueService) {
                 // response is OK so update the venue List
                 VenueService.getVenues().then(function (resp) {
                     console.log('Updating venues with:', resp.data); // another dev log
-                    $rootScope.other_venues = resp.data;
+                    $rootScope.response_venues = resp.data;
                 });
             }
         });
