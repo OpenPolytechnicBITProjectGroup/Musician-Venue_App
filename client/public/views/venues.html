@@ -50,7 +50,12 @@
                         </table>
                     </form>
                 </div>
-                <div class="col-xs-12 col-md-6 col-lg-3" ng-repeat="resp_venue in response_venues" >
+                
+				
+				<venue-list response-venue="venue" ng-repeat="venue in response_venues"></venue-list>
+				
+			
+				<!--<div class="col-xs-12 col-md-6 col-lg-3" ng-repeat="resp_venue in response_venues" >
                     <div class="card">
                         <h4>{{resp_venue.name}}</h4>
                         <ul>
@@ -59,7 +64,7 @@
                             <li>Preferred Genres: <span ng-repeat="genre in resp_venue.genres">{{genre}}{{$last ? '' : ', '}}</span></li>
                         </ul>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>
