@@ -29,6 +29,7 @@ gulp.task('scripts', function () {
         './node_modules/jquery/dist/jquery.js',
         './client/assets/js/bootstrapper.js',
         './client/assets/js/services/*.js',
+        './client/assets/js/directives/*.js',
         './client/assets/js/controllers/*.js',
         './client/assets/js/directives/*.js',
         './client/assets/js/venues/*.js',
