@@ -9,8 +9,12 @@ app.directive('coverflow', function(){
             '<div class="coverflow__container">' +
                 '<div class="coverflow__element" style="{{loadElementStyle($index)}}" ng-click="changeIndex($index)" ng-repeat="item in list">' +
                     '<h2  class="coverflow__title">{{ item.name }}</h2>' +
-                    '<div class="coverflow__image">'+
-                    '{{ item.location }}"' +
+                    '<div class="card">'+
+                        '<ul>'+
+                            '<li>Location: {{item.location}}</li>'+
+                            '<li>Capacity: {{item.capacity}}</li>'+
+                            '<li>Preferred Genres: <span ng-repeat="genre in item.genres">{{genre}}{{$last ? "" : ", "}}</span></li>'+
+                        '</ul>'+
                 '</div>' +
                 '</div>' +
             '</div>' +
@@ -29,9 +33,9 @@ app.directive('coverflow', function(){
                         scope.$apply();
                     });
                 }
-                //scope.coverflowItems = scope.list;
+                scope.coverflowItems = scope.list;
                 function init() {
-                    scope.index = parseInt(scope.list.length / 2);
+                    scope.index = 0; //parseInt(scope.coverflowItems.length / 2);
                     listenToKeystrokes();
                 }
                 init();
@@ -47,7 +51,7 @@ app.directive('coverflow', function(){
                     }
                 }
                 function goRight() {
-                    if(scope.index !== scope.list.length - 1) {
+                    if(scope.index !== scope.coverflowItems.length - 1) {
                         scope.index++;
                     }
                 }
@@ -68,11 +72,3 @@ app.directive('coverflow', function(){
         }
     }
 );
-
-app.controller('coverController', ['$scope', 'VenueService', function($scope, VenueService){
-    // Send request to server on first load of page and return
-    VenueService.getVenues().then(function (resp) {
-        $scope.items = resp.data;
-    });
-
-}]);

@@ -50,8 +50,10 @@
                         </table>
                     </form>
                 </div>
-                <div ng-controller="coverController">
-                    <coverflow list="items"></coverflow>
+                <div style="padding-top: 500px">
+                    <div ng-if="response_venues">
+                        <coverflow list="response_venues"></coverflow>
+                    </div>
                 </div>
                 <!--
                 <div class="col-xs-12 col-md-6 col-lg-3" ng-repeat="resp_venue in response_venues" >
