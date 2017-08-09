@@ -7,14 +7,37 @@ module.exports = {
         let responseArray = [];
 
         if (req.query['type'] === 'venue') {
-            VenueModel.getByGenre(req.query['genre']).then(venues => {
-                if (venues) {
-                    venues.forEach(venue => {
-                        responseArray.push(venue);
-                    });
-                }
-                res.send(responseArray);
-            });
+            // If the search is for venues matching a specified genre
+            if(req.query['genre']){
+                VenueModel.getByGenre(req.query['genre']).then(venues => {
+                    if (venues) {
+                        venues.forEach(venue => {
+                            responseArray.push(venue);
+                        });
+                    }
+                    res.send(responseArray);
+                });
+            }
+            // If the search is for venues matching a query string for their name
+            else if (req.query['query']){
+                // 501: Not implemented
+                res.sendStatus(501);
+            }
+            // If the search is for venues matching a location
+            else if (req.query['location']){
+                VenueModel.getByLocation(req.query['location']).then(venues => {
+                    if (venues) {
+                        venues.forEach(venue => {
+                            responseArray.push(venue);
+                        });
+                    }
+                    res.send(responseArray);
+                });
+            }
+            else {
+                // 501: Not implemented
+                res.sendStatus(501);
+            }
         }
         else {
             // 501: Not implemented

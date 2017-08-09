@@ -79,6 +79,28 @@ module.exports = {
             console.log(error);
         });
 
+    },
+    getByLocation: function (location) {
+        let session = db.session();
+        let resultPromise = session.readTransaction(tx => tx.run(
+            'MATCH (v:Venue) \
+            WHERE (v.location) = {location} \
+            RETURN v AS venue',
+            {
+                location: location
+            }
+        ));
+        return resultPromise.then(result => {
+            session.close();
+
+            return result.records.map(record => {
+                let v = record.get("venue").properties;
+                return new this.Venue(v.name, v.capacity, v.location, v.genres)
+            });
+        }).catch(error => {
+            console.log(error);
+        });
+
     }
 
 };
