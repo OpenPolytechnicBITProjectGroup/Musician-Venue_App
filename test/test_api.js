@@ -180,6 +180,7 @@ describe('GET /api/search', () => {
             .query({type: 'venue', genre: 'Pop'})
             .end((err, res) => {
                 res.should.have.status(200);
+                res.body.should.be.a('array');
                 done();
             });
     }));
@@ -196,7 +197,7 @@ describe('GET /api/search', () => {
     it('should return an array', (done => {
         chai.request(app)
             .get('/api/search')
-            .query({genre: 'Pop', type: 'venue'})
+            .query({location: 'Wellington', type: 'venue'})
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('array');
