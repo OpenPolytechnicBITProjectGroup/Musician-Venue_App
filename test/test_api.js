@@ -174,7 +174,7 @@ describe('GET /api/genres', () => {
  * Test the GET /search route
  */
 describe('GET /api/search', () => {
-    it('should return status 200', (done => {
+    it('Search by genre should return status 200 and an array', (done => {
         chai.request(app)
             .get('/api/search')
             .query({type: 'venue', genre: 'Pop'})
@@ -194,7 +194,7 @@ describe('GET /api/search', () => {
             });
     }));
 
-    it('should return an array', (done => {
+    it('Search by location should return status 200 and an array', (done => {
         chai.request(app)
             .get('/api/search')
             .query({location: 'Wellington', type: 'venue'})
