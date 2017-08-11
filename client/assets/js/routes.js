@@ -5,6 +5,12 @@ app.config(function ($routeProvider, $locationProvider) {
             controller: 'VenueController',
         });
 
+    $routeProvider
+        .when('/members', {
+            templateUrl: '/views/members.html',
+            controller: 'VenueController',
+        });
+
     $locationProvider.html5Mode({
         enabled: true,
         requireBase: false
