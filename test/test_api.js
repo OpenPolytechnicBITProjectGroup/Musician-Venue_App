@@ -174,12 +174,13 @@ describe('GET /api/genres', () => {
  * Test the GET /search route
  */
 describe('GET /api/search', () => {
-    it('should return status 200', (done => {
+    it('Search by genre should return status 200 and an array', (done => {
         chai.request(app)
             .get('/api/search')
             .query({type: 'venue', genre: 'Pop'})
             .end((err, res) => {
                 res.should.have.status(200);
+                res.body.should.be.a('array');
                 done();
             });
     }));
@@ -193,10 +194,10 @@ describe('GET /api/search', () => {
             });
     }));
 
-    it('should return an array', (done => {
+    it('Search by location should return status 200 and an array', (done => {
         chai.request(app)
             .get('/api/search')
-            .query({genre: 'Pop', type: 'venue'})
+            .query({location: 'Wellington', type: 'venue'})
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('array');
