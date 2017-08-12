@@ -1,15 +1,15 @@
 <nav ng-controller="SearchController" class="navbar navbar-default navbar-static-top">
-    <div class="container">      
+    <div class="container">
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li>
-                    <form role="search" class="navbar-form" id="search">
+                    <form role="search" class="navbar-form" id="search" name="search">
                         <div class="form-group">
-                            <select multiple ng-model="search.genre" ng-options="genre for genre in db_genres">
-                                            <option value="">--Select--</option>
-                                        </select>
+                            <p class="validation-feedback" ng-if="search.genres.$invalid">Please select a genre:</p>
+                            <select multiple ng-model="search.genre" ng-options="genre for genre in db_genres"
+                                    name="genres" required></select>
                         </div>
-                        <button class="btn btn-default" ng-click="searchVenue(search)">Search</button>
+                        <button type="submit" class="btn btn-default" ng-click="searchVenue(search)" ng-disabled="search.genres.$invalid">Search</button>
                     </form>
                 </li>
             </ul>
@@ -17,11 +17,11 @@
     </div>
 </nav>
 
-<section  class="venue-information">
+<section class="venue-information">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                
+
                 <screen-size></screen-size>
                 <!-- This for mobile or small screens 
                 <div style="padding-top: 500px">
@@ -34,21 +34,24 @@
                 <venue-list response-venue="venue" ng-repeat="venue in response_venues"></venue-list> 
                 -->
 
-				    <!--  Original card for reference
+                <!--  Original card for reference
 
-                  <div class="col-xs-12 col-md-6 col-lg-3" ng-repeat="resp_venue in response_venues" >
-                    <div class="card">
-                        <h4>{{resp_venue.name}}</h4>
-                        <ul>
-                            <li>Location: {{resp_venue.location}}</li>
-                            <li>Capacity: {{resp_venue.capacity}}</li>
-                            <li>Preferred Genres: <span ng-repeat="genre in resp_venue.genres">{{genre}}{{$last ? '' : ', '}}</span></li>
-                        </ul>
-                    </div>
+              <div class="col-xs-12 col-md-6 col-lg-3" ng-repeat="resp_venue in response_venues" >
+                <div class="card">
+                    <h4>{{resp_venue.name}}</h4>
+                    <ul>
+                        <li>Location: {{resp_venue.location}}</li>
+                        <li>Capacity: {{resp_venue.capacity}}</li>
+                        <li>Preferred Genres: <span ng-repeat="genre in resp_venue.genres">{{genre}}{{$last ? '' : ', '}}</span></li>
+                    </ul>
                 </div>
-            -->
+            </div>
+        -->
             </div>
         </div>
     </div>
 </section>
+
+
+
 
