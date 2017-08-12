@@ -31,6 +31,7 @@ gulp.task('scripts', function () {
         './client/assets/js/services/*.js',
         './client/assets/js/directives/*.js',
         './client/assets/js/controllers/*.js',
+        './client/assets/js/directives/*.js',
         './client/assets/js/venues/*.js',
         './client/assets/js/routes.js'
     ])
