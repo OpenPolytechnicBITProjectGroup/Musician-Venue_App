@@ -4,8 +4,7 @@
 
  app.controller('SearchController', ['$rootScope', '$scope', '$http', 'SearchService', 'VenueService', 
                             function ($rootScope, $scope, $http, SearchService, VenueService) {
-    
-    /* Use the getGenres() to get a list to search 
+    /* Use the getGenres() to get a list to search
     Not needed here as the $scope for Venue controller covers entire page
     
     VenueService.getGenres().then(function (resp) {
