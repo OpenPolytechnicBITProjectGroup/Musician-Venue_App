@@ -1,0 +1,14 @@
+<div class="container">      
+    <ul class="searchbar" ng-controller="SearchController">
+        <li>
+            <form role="search" class="searchbar-form" id="search" name="search">
+                <div class="form-group">
+                    <p class="validation-feedback" ng-if="search.genres.$invalid">Please select a genre:</p>
+                    <select multiple ng-model="search.genre" ng-options="genre for genre in search_genres"
+                            name="genres" required></select>
+                </div>
+                <button type="submit" class="btn btn-default" ng-click="searchVenue(search)" ng-disabled="search.genres.$invalid">Search</button>
+            </form>
+        </li>
+    </ul>
+</div>

@@ -1,21 +1,4 @@
-<nav ng-controller="SearchController" class="navbar navbar-default navbar-static-top">
-    <div class="container">
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li>
-                    <form role="search" class="navbar-form" id="search" name="search">
-                        <div class="form-group">
-                            <p class="validation-feedback" ng-if="search.genres.$invalid">Please select a genre:</p>
-                            <select multiple ng-model="search.genre" ng-options="genre for genre in db_genres"
-                                    name="genres" required></select>
-                        </div>
-                        <button type="submit" class="btn btn-default" ng-click="searchVenue(search)" ng-disabled="search.genres.$invalid">Search</button>
-                    </form>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<search-bar page="venues"></search-bar>
 
 <section class="venue-information">
     <div class="container">

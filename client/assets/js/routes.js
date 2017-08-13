@@ -8,7 +8,7 @@ app.config(function ($routeProvider, $locationProvider) {
     $routeProvider
         .when('/members', {
             templateUrl: '/views/members.html',
-            controller: 'VenueController',
+            controller: 'MemberController',
         });
 
     $locationProvider.html5Mode({
