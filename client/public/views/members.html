@@ -1,10 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Blank</title>
-</head>
-<body>
-<p>This page was intentionally left blank since I'm too lazy to write anything yet.</p>
-</body>
-</html>
+<div class="table-responsive">
+    <form novalidate class="simple-form">
+        <table id="results" class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Venue name</th>
+                    <th>Capacity</th>
+                    <th>Location</th>
+                    <th>Preferred Genres</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>                   
+                    <td><input type="text" ng-model="venue.name"/></td>
+                    <td><input type="number" ng-model="venue.capacity" min="0"/></td>
+                    <td><input type="text" ng-model="venue.location"/></td>
+                    <td><select multiple ng-model="venue.genres" ng-options="genre for genre in db_genres">
+                            <option value="">--Select--</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button ng-click="sendVenue(venue)">Submit Venue</button>
+                    </td>                           
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>

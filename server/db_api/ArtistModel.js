@@ -2,38 +2,41 @@ let _ = require('lodash');
 let db = require('./Database.js').db;
 
 module.exports = {
-    Venue: function (name, capacity, location, genres) {
+    Artist: function (name, location, bio, genres, rating) {
         this.name = name;
-        this.capacity = capacity;
         this.location = location;
+        this.bio = bio;
         this.genres = [];
+        this.rating = rating;
+
         if (genres) {
             this.genres = _.concat(this.genres, genres);
         }
     },
-    create: function (venue) {
+    create: function (artist) {
         let session = db.session();
         let resultPromise = session.writeTransaction(tx => tx.run(
-            "MERGE (v:Venue {name: {name}, capacity: {capacity}, \
-                    location: {location}, genres: {genres}}) \
+            "MERGE (a:Artist {name: {name}, location: {location}, \
+                    bio: {bio}, genres: {genres}, rating: {rating}}) \
                     FOREACH (genreName in {genres}| MERGE (g:Genre \
-                        {name: genreName}) MERGE(v)-[:LIKES_GENRES]-(g)) \
-                        RETURN v",
+                        {name: genreName}) MERGE(a)-[:PLAYS_GENRES]-(g)) \
+                        RETURN a",
             {
-                name: venue.name,
-                capacity: venue.capacity,
-                location: venue.location,
-                genres: venue.genres
+                name: artist.name,
+                location: artist.location,
+                bio: artist.bio,
+                rating: artist.rating,
+                genres: artist.genres
             }));
 
         return resultPromise.then(result => {
             session.close();
 
             const singleRecord = result.records[0];
-            const oneVenue = singleRecord.get(0);
+            const oneArtist = singleRecord.get(0);
 
             if (process.env.NODE_ENV !== 'test') {
-                console.log(oneVenue);
+                console.log(oneArtist);
             }
 
         }).catch(error => {
@@ -44,15 +47,15 @@ module.exports = {
         let session = db.session();
 
         const resultPromise = session.readTransaction(tx => tx.run(
-            'MATCH (venue:Venue) RETURN venue'
+            'MATCH (artist:Artist) RETURN artist'
         ));
 
         return resultPromise.then(result => {
             session.close();
 
             return result.records.map(record => {
-                let v = record.get("venue").properties;
-                return new this.Venue(v.name, v.capacity, v.location, v.genres)
+                let artist = record.get("artist").properties;
+                return new this.Artist(artist.name, artist.location, artist.bio, artist.genres, artist.rating)
             });
         }).catch(error => {
             console.log(error);
@@ -61,9 +64,9 @@ module.exports = {
     getByGenre: function (genre) {
         let session = db.session();
         let resultPromise = session.readTransaction(tx => tx.run(
-            'MATCH (v:Venue)-[:LIKES_GENRES]->(g:Genre) \
+            'MATCH (a:Artist)-[:PLAYS_GENRES]->(g:Genre) \
             WHERE (g.name) = {genre} \
-            RETURN v AS venue',
+            RETURN a AS artist',
             {
                 genre: genre
             }
@@ -72,8 +75,8 @@ module.exports = {
             session.close();
 
             return result.records.map(record => {
-                let v = record.get("venue").properties;
-                return new this.Venue(v.name, v.capacity, v.location, v.genres)
+                let artist = record.get("artist").properties;
+                return new this.Artist(artist.name, artist.location, artist.bio, artist.genres, artist.rating)
             });
         }).catch(error => {
             console.log(error);
@@ -83,9 +86,9 @@ module.exports = {
     getByLocation: function (location) {
         let session = db.session();
         let resultPromise = session.readTransaction(tx => tx.run(
-            'MATCH (v:Venue) \
-            WHERE (v.location) = {location} \
-            RETURN v AS venue',
+            'MATCH (a:Artist) \
+            WHERE (a.location) = {location} \
+            RETURN a AS artist',
             {
                 location: location
             }
@@ -94,8 +97,8 @@ module.exports = {
             session.close();
 
             return result.records.map(record => {
-                let v = record.get("venue").properties;
-                return new this.Venue(v.name, v.capacity, v.location, v.genres)
+                let artist = record.get("artist").properties;
+                return new this.Artist(artist.name, artist.location, artist.bio, artist.genres, artist.rating)
             });
         }).catch(error => {
             console.log(error);
