@@ -115,7 +115,7 @@ describe('GET /venues', () => {
 });
 
 /*
-    * Test the GET /api/venues route (list of venues)
+    * Test getting a list of venues
     */
 describe('GET /api/venues', () => {
     it('Should GET all the venues', (done => {
@@ -131,12 +131,11 @@ describe('GET /api/venues', () => {
 });
 
 /*
-    * Test the GET /send_venue + parameter venue 
+    * Test posting venues
     */
-describe('POST /api/venues + param', () => {
+describe('POST /api/venues', () => {
 
     it('Should return response 201 CREATED', (done => {
-        // let venue = new Venue.Venue("The Grand", 500, "Wellington", ["Pop", "DJ/Electronic"]);
         chai.request(app)
             .post('/api/venues')
             .type('form')
@@ -201,6 +200,44 @@ describe('GET /api/search', () => {
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('array');
+                done();
+            });
+    }));
+});
+
+/*
+    * Test getting a list of artists
+    */
+describe('GET /api/artists', () => {
+    it('Should GET all the artists', (done => {
+        chai.request(app)
+            .get('/api/artists')
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('array');
+                done();
+            });
+    }));
+});
+
+/*
+    * Test posting artist
+    */
+describe('POST /api/artists', () => {
+
+    it('Should return response 201 CREATED', (done => {
+        chai.request(app)
+            .post('/api/artists')
+            .type('form')
+            .send([{
+                "name" : "Test Artist",
+                "location" : "Timaru",
+                "bio": "A test artist from timaru",
+                "rating" : "4.2",
+                "genres" : ["World", "Classical"]
+            }])
+            .end((err, res) => {
+                res.should.have.status(201);
                 done();
             });
     }));
