@@ -54,8 +54,8 @@ function test() {
 function migrate() {
     "use strict";
     migrateGenres();
-    migrateArtists();
-    migrateVenues();
+    //migrateArtists();
+    //migrateVenues();
 }
 
 function migrateGenres() {
@@ -69,6 +69,9 @@ function migrateGenres() {
     return resultPromise.then(result => {
         session.close();
         console.log("Created " + result.records.length + " records for Genre");
+        // link to the artist and venue migration scripts.
+        migrateArtists();
+        migrateVenues();
     }).catch(error => {
         console.log(error);
     });
@@ -109,7 +112,7 @@ function migrateVenues() {
         }) \
         FOREACH (genreName in csvLine.genres| MERGE (g:Genre\
          {name: genreName}) MERGE(v)-[:LIKES_GENRES]-(g))\
-        RETURN v')); // if the artist exists it wont be added
+        RETURN v')); // if the venue exists it wont be added
 
     return resultPromise.then(result => {
         session.close();
