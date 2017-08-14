@@ -53,32 +53,32 @@ function test() {
 
 function migrate() {
     "use strict";
-    migrateGenres();
+    let session = db.session();
+    migrateGenres(session);
     //migrateArtists();
     //migrateVenues();
 }
 
-function migrateGenres() {
-    let session = db.session();
-
+function migrateGenres(session) {
+    
     let resultPromise = session.writeTransaction(tx => tx.run(
         'LOAD CSV FROM "https://raw.githubusercontent.com/OpenPolytechnicBITProjectGroup/Resources/master/Database_files/genres.csv" \
     as csvLine \
     MERGE (g:Genre {name: csvLine}) RETURN g')); // if the genre exists it wont be added
 
     return resultPromise.then(result => {
-        session.close();
+       
         console.log("Created " + result.records.length + " records for Genre");
-        // link to the artist and venue migration scripts.
-        migrateArtists();
-        migrateVenues();
+        // on resolving of this Promise migrate artist.
+        migrateArtists(session);
+      
     }).catch(error => {
         console.log(error);
     });
 }
 
-function migrateArtists() {
-    let session = db.session();
+function migrateArtists(session) {
+    
     let resultPromise = session.writeTransaction(tx => tx.run(
         'LOAD CSV WITH HEADERS FROM "https://raw.githubusercontent.com/OpenPolytechnicBITProjectGroup/Resources/master/Database_files/artists.csv" \
         as csvLine \
@@ -94,15 +94,17 @@ function migrateArtists() {
         RETURN a')); // if the artist exists it wont be added
 
     return resultPromise.then(result => {
-        session.close();
+        
         console.log("Created " + result.records.length + " records for Artist");
+        // on resolving this Promise migrate the venues
+        migrateVenues(session)
     }).catch(error => {
         console.log(error);
     });
 }
 
-function migrateVenues() {
-    let session = db.session();
+function migrateVenues(session) {
+    
     let resultPromise = session.writeTransaction(tx => tx.run(
         'LOAD CSV WITH HEADERS FROM "https://raw.githubusercontent.com/OpenPolytechnicBITProjectGroup/Resources/master/Database_files/venues.csv" \
         as csvLine \
@@ -118,6 +120,7 @@ function migrateVenues() {
 
     return resultPromise.then(result => {
         session.close();
+        // last of the Promises so OK to exit
         console.log("Created " + result.records.length + " records for Venue");
         process.exit();
     }).catch(error => {
