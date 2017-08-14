@@ -87,11 +87,10 @@ function migrateArtists() {
             location: csvLine.location,\
             rating: csvLine.rating,\
             bio: csvLine.bio,\
-            genres: []\
+            genres: split(csvLine.genres, ";")\
         }) \
-        FOREACH (genreName in csvLine.genres| MERGE (g:Genre\
-         {name: genreName}) MERGE(a)-[:PLAYS_GENRES]-(g) \
-        SET a.genres = a.genres + genreName)\
+        FOREACH (genreName in a.genres| MERGE (g:Genre\
+         {name: genreName}) MERGE(a)-[:PLAYS_GENRES]-(g)) \
         RETURN a')); // if the artist exists it wont be added
 
     return resultPromise.then(result => {
@@ -111,11 +110,10 @@ function migrateVenues() {
             name: csvLine.name,\
             location: csvLine.location,\
             capacity: csvLine.capacity,\
-            genres: []\
+            genres: split(csvLine.genres, ";")\
         }) \
-        FOREACH (genreName in csvLine.genres| MERGE (g:Genre\
-         {name: genreName}) MERGE(v)-[:LIKES_GENRES]-(g) \
-        SET v.genres = v.genres + genreName)\
+        FOREACH (genreName in v.genres| MERGE (g:Genre\
+         {name: genreName}) MERGE(v)-[:LIKES_GENRES]-(g)) \
         RETURN v')); // if the venue exists it wont be added
 
     return resultPromise.then(result => {
