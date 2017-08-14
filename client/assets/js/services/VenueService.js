@@ -7,13 +7,6 @@ app.service('VenueService', function ($http) {
         });
     };
 
-// get genres function
-    this.getGenres = function () {
-        return $http.get('/api/genres').then(function (resp) {
-            return resp;
-        });
-    };
-
 // Sends the Venue data
     this.sendVenues = function (venue) {
         return $http.post('/api/venues', venue)
