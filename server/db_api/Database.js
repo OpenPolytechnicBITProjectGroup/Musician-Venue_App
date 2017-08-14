@@ -10,6 +10,12 @@ var bolt_user = (process.env['NEO4J_BOLT_USER'] || process.env['GRAPHENEDB_BOLT_
 var bolt_pass = (process.env['NEO4J_BOLT_PASSWORD'] || process.env['GRAPHENEDB_BOLT_PASSWORD'] ||
     'neo4j2');
 
+if (process.env["DEBUG"] && process.env["DEBUG"] === true) {
+    console.log("Connecting to DB: " + bolt_url);
+    console.log("User:" + bolt_user);
+    console.log("Pass:" + bolt_pass);
+}
+
 
 db = neo4j.driver(bolt_url, neo4j.auth.basic(bolt_user, bolt_pass));
 
@@ -45,36 +51,82 @@ function test() {
     });
 }
 
+function migrate() {
+    "use strict";
+    let session = db.session();
+    migrateGenres(session);
+    //migrateArtists();
+    //migrateVenues();
+}
 
-
-/*
- * Loads CSV files of essential data if not already in existance
- * within the database
- */
-function initialise() {
-    // call the genre.csv file and install Genre nodes
-    var session = db.session();
-
-    const resultPromise = session.writeTransaction(tx => tx.run(
+function migrateGenres(session) {
+    
+    let resultPromise = session.writeTransaction(tx => tx.run(
         'LOAD CSV FROM "https://raw.githubusercontent.com/OpenPolytechnicBITProjectGroup/Resources/master/Database_files/genres.csv" \
-        as csvLine \
-        MERGE (g:Genre {name: csvLine}) RETURN g')); // if the genre exists it wont be added
+    as csvLine \
+    MERGE (g:Genre {name: csvLine}) RETURN g')); // if the genre exists it wont be added
 
-    resultPromise.then(result => {
-        session.close();
-
-        const singleRecord = result.records[0];
-        const oneGenre = singleRecord.get(0);
-
-        console.log(oneGenre);
-
+    return resultPromise.then(result => {
+       
+        console.log("Created " + result.records.length + " records for Genre");
+        // on resolving of this Promise migrate artist.
+        migrateArtists(session);
+      
     }).catch(error => {
         console.log(error);
     });
+}
 
+function migrateArtists(session) {
+    
+    let resultPromise = session.writeTransaction(tx => tx.run(
+        'LOAD CSV WITH HEADERS FROM "https://raw.githubusercontent.com/OpenPolytechnicBITProjectGroup/Resources/master/Database_files/artists.csv" \
+        as csvLine \
+        MERGE (a:Artist {\
+            name: csvLine.name,\
+            location: csvLine.location,\
+            rating: csvLine.rating,\
+            bio: csvLine.bio,\
+            genres: split(csvLine.genres, ";")\
+        }) \
+        FOREACH (genreName in a.genres| MERGE (g:Genre\
+         {name: genreName}) MERGE(a)-[:PLAYS_GENRES]-(g)) \
+        RETURN a')); // if the artist exists it wont be added
+
+    return resultPromise.then(result => {
+        
+        console.log("Created " + result.records.length + " records for Artist");
+        // on resolving this Promise migrate the venues
+        migrateVenues(session)
+    }).catch(error => {
+        console.log(error);
+    });
+}
+
+function migrateVenues(session) {
+    
+    let resultPromise = session.writeTransaction(tx => tx.run(
+        'LOAD CSV WITH HEADERS FROM "https://raw.githubusercontent.com/OpenPolytechnicBITProjectGroup/Resources/master/Database_files/venues.csv" \
+        as csvLine \
+        MERGE (v:Venue {\
+            name: csvLine.name,\
+            location: csvLine.location,\
+            capacity: csvLine.capacity,\
+            genres: split(csvLine.genres, ";")\
+        }) \
+        FOREACH (genreName in v.genres| MERGE (g:Genre\
+         {name: genreName}) MERGE(v)-[:LIKES_GENRES]-(g)) \
+        RETURN v')); // if the venue exists it wont be added
+
+    return resultPromise.then(result => {
+        session.close();
+        // last of the Promises so OK to exit
+        console.log("Created " + result.records.length + " records for Venue");
+        process.exit();
+    }).catch(error => {
+        console.log(error);
+    });
 }
 
 exports.db = db;
-exports.initialise = initialise;
-// test() is probably not needed any more..
-// exports.test = test();
+exports.migrate = migrate;

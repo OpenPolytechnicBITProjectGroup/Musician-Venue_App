@@ -21,6 +21,12 @@ $ npm install -i
 * Start Neo4j ([Download & Install](http://neo4j.com/download)) locally and open the [Neo4j Browser](http://localhost:7474).
 * You will be asked to choose a user name and password, update the password to **'neo4j2'**
 
+To add some data to the database, use the following command:
+```bash
+$ npm run migrate
+```
+
+Running the tests will also create some data.
 
 ```bash
 # run in developement mode
