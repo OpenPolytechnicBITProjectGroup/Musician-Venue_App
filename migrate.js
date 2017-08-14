@@ -5,5 +5,5 @@ const db = require('./server/db_api/Database.js');
 global.__baseDir = __dirname;
 
 // initialise the database
+
 db.migrate();
-process.exit();
