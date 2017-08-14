@@ -6,7 +6,6 @@ const express = require('express');
 //TODO: Isn't this line overwritten by the last line?
 const app = module.exports = express();
 require('dotenv').config();
-const db = require('./server/db_api/Database.js');
 let bodyParser = require('body-parser');
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
@@ -63,8 +62,14 @@ app.set('port', (process.env.PORT || 5000));
 if (!module.parent) { // conditional to make sure tests are not trying to call listen twice
     app.listen(app.get('port'), function () {
         console.log('Started Server. Listening on ' + app.get('port'));
-        // initialise the database
-        db.initialise();
+    }).on('error', function(err) {
+        "use strict";
+        if(err.code === "EADDRINUSE"){
+            console.log("Error: Port " + app.get('port') + " is already in use!");
+        }
+        else{
+            console.log(err);
+        }
     });
 }
 module.exports = {app, routes: {serverRoutes, clientRoutes}};

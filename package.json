@@ -8,6 +8,7 @@
     "test:watch": "npm test -- --watch -R min",
     "dev": "SET NODE_ENV=dev && node index.js",
     "start": "node index.js",
+    "migrate": "node migrate.js",
     "gulp": "gulp",
     "gulp:watch": "npm gulp watch"
   },

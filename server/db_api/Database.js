@@ -10,6 +10,12 @@ var bolt_user = (process.env['NEO4J_BOLT_USER'] || process.env['GRAPHENEDB_BOLT_
 var bolt_pass = (process.env['NEO4J_BOLT_PASSWORD'] || process.env['GRAPHENEDB_BOLT_PASSWORD'] ||
     'neo4j2');
 
+if(process.env["DEBUG"] && process.env["DEBUG"] === true){
+    console.log("Connecting to DB: " + bolt_url);
+    console.log("User:" + bolt_user);
+    console.log("Pass:" + bolt_pass);
+}
+
 
 db = neo4j.driver(bolt_url, neo4j.auth.basic(bolt_user, bolt_pass));
 
@@ -51,9 +57,9 @@ function test() {
  * Loads CSV files of essential data if not already in existance
  * within the database
  */
-function initialise() {
+function migrate() {
     // call the genre.csv file and install Genre nodes
-    var session = db.session();
+    let session = db.session();
 
     const resultPromise = session.writeTransaction(tx => tx.run(
         'LOAD CSV FROM "https://raw.githubusercontent.com/OpenPolytechnicBITProjectGroup/Resources/master/Database_files/genres.csv" \
@@ -75,6 +81,4 @@ function initialise() {
 }
 
 exports.db = db;
-exports.initialise = initialise;
-// test() is probably not needed any more..
-// exports.test = test();
+exports.migrate = migrate;
