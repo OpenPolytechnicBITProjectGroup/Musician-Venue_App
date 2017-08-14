@@ -1,6 +1,7 @@
 {
   "name": "Musician-Venue_App",
   "scripts": {
+    "postdeploy": "node migrate.js"
   },
   "env": {
   },
