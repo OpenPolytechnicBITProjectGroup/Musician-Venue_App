@@ -121,7 +121,7 @@ function migrateVenues() {
     return resultPromise.then(result => {
         session.close();
         console.log("Created " + result.records.length + " records for Venue");
-
+        process.exit();
     }).catch(error => {
         console.log(error);
     });
